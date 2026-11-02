@@ -1,0 +1,922 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Référentiel Naturo</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Naturo">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151A17" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap">
+<style>
+[hidden]{display:none!important}
+/* Layout : barre de recherche fixe en haut, colonne de navigation à gauche, lecture au centre, sommaire à droite sur grand écran */
+:root{
+  --bg:#F4F5F1; --surface:#FFFFFF; --surface-2:#F9FAF7; --ink:#25302A; --muted:#67736B; --faint:#98A29A;
+  --line:#DEE3DB; --accent:#2F6B4E; --accent-ink:#FFFFFF; --accent-soft:#E2EFE6; --focus:#5B9A7A;
+  --mark:#FFE58A; --mark-ink:#25302A;
+  --k-alert-bg:#FCEBF1; --k-alert-line:#E5A9BE; --k-alert-ink:#8E3555;
+  --k-upd-bg:#FFF6D8; --k-upd-line:#E7CB72; --k-upd-ink:#7A5B0D;
+  --k-med-bg:#EDF3FA; --k-med-line:#B6CDE6; --k-med-ink:#30577F;
+  --k-nat-bg:#EBF5EE; --k-nat-line:#AFD3BC; --k-nat-ink:#2F6B4E;
+  --k-emo-bg:#F3EFFA; --k-emo-line:#CEC2E8; --k-emo-ink:#5D4B8C;
+  --k-warn-bg:#FDF1E6; --k-warn-line:#EDC39C; --k-warn-ink:#8A5426;
+  --k-perso-bg:#E9F5F4; --k-perso-line:#A8D4D0; --k-perso-ink:#2C6964;
+  --k-note-bg:#F3F4F0; --k-note-line:#DADFD6;
+  --shadow:0 1px 2px rgba(37,48,42,.06),0 6px 22px rgba(37,48,42,.07);
+  --font:"Poppins",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --r:12px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#161B18; --surface:#1E2521; --surface-2:#232B26; --ink:#E6ECE7; --muted:#A3AEA6; --faint:#77827A;
+  --line:#323C36; --accent:#7CC39E; --accent-ink:#11251B; --accent-soft:#25382D; --focus:#7CC39E;
+  --mark:#7A6420; --mark-ink:#FFF6D8;
+  --k-alert-bg:#3A2029; --k-alert-line:#7D3B54; --k-alert-ink:#F2B4C9;
+  --k-upd-bg:#372F17; --k-upd-line:#7C6524; --k-upd-ink:#F0D98C;
+  --k-med-bg:#1E2B39; --k-med-line:#3C5878; --k-med-ink:#A9C8EA;
+  --k-nat-bg:#1C2E24; --k-nat-line:#3A6A4F; --k-nat-ink:#9FD5B6;
+  --k-emo-bg:#29243A; --k-emo-line:#54487A; --k-emo-ink:#CFC3F0;
+  --k-warn-bg:#36261A; --k-warn-line:#7A5130; --k-warn-ink:#F0C49B;
+  --k-perso-bg:#1B302E; --k-perso-line:#3D6E6A; --k-perso-ink:#A3DAD5;
+  --k-note-bg:#232B26; --k-note-line:#36413A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#161B18; --surface:#1E2521; --surface-2:#232B26; --ink:#E6ECE7; --muted:#A3AEA6; --faint:#77827A;
+  --line:#323C36; --accent:#7CC39E; --accent-ink:#11251B; --accent-soft:#25382D; --focus:#7CC39E;
+  --mark:#7A6420; --mark-ink:#FFF6D8;
+  --k-alert-bg:#3A2029; --k-alert-line:#7D3B54; --k-alert-ink:#F2B4C9;
+  --k-upd-bg:#372F17; --k-upd-line:#7C6524; --k-upd-ink:#F0D98C;
+  --k-med-bg:#1E2B39; --k-med-line:#3C5878; --k-med-ink:#A9C8EA;
+  --k-nat-bg:#1C2E24; --k-nat-line:#3A6A4F; --k-nat-ink:#9FD5B6;
+  --k-emo-bg:#29243A; --k-emo-line:#54487A; --k-emo-ink:#CFC3F0;
+  --k-warn-bg:#36261A; --k-warn-line:#7A5130; --k-warn-ink:#F0C49B;
+  --k-perso-bg:#1B302E; --k-perso-line:#3D6E6A; --k-perso-ink:#A3DAD5;
+  --k-note-bg:#232B26; --k-note-line:#36413A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:6px}
+mark{background:var(--mark);color:var(--mark-ink);border-radius:3px;padding:0 1px}
+
+/* chips de couleur par groupe : chaque élément reçoit --cb-l/--cf-l/--cb-d/--cf-d */
+.tint{--cb:var(--cb-l);--cf:var(--cf-l)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tint{--cb:var(--cb-d);--cf:var(--cf-d)}}
+:root[data-theme="dark"] .tint{--cb:var(--cb-d);--cf:var(--cf-d)}
+
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.top-in{display:flex;align-items:center;gap:14px;padding-block:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));max-width:1500px;margin:0 auto}
+.back{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:7px 13px 7px 9px;font:inherit;font-size:13.5px;font-weight:500;cursor:pointer;flex:none}
+.back[hidden]{display:none}
+.back svg{width:18px;height:18px}
+@media (max-width:700px){.back span{display:none}.back{padding:8px}}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:.01em;white-space:nowrap;cursor:pointer;background:none;border:0;padding:4px 2px}
+.brand svg{width:26px;height:26px;flex:none}
+.brand small{display:block;font-weight:400;color:var(--muted);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;line-height:1.1}
+.brand span{line-height:1.15;text-align:left}
+.search{flex:1;min-width:0;position:relative;max-width:760px}
+.search input{width:100%;height:46px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface-2);padding:0 46px 0 46px;font-size:15.5px;transition:border-color .15s,box-shadow .15s}
+.search input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft);background:var(--surface)}
+.search svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--muted);pointer-events:none}
+.search kbd{position:absolute;right:14px;top:50%;transform:translateY(-50%);font:500 11px var(--font);color:var(--faint);border:1px solid var(--line);border-radius:6px;padding:1px 6px;background:var(--surface)}
+.search .clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);border:0;background:var(--line);width:26px;height:26px;border-radius:50%;cursor:pointer;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 15px;font-size:13.5px;font-weight:500;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.primary:hover{filter:brightness(1.07);color:var(--accent-ink)}
+a.btn{text-decoration:none}
+.fhead .tools a.btn.primary,.cons a.btn,.cons .btn.primary{text-decoration:none}
+.fhead .tools a.cbtn{background:var(--accent)!important;color:var(--accent-ink)!important;border-color:var(--accent)!important;font-weight:600}
+.btn.ghost{border-color:transparent;background:transparent}
+.btn.danger{color:var(--k-alert-ink);border-color:var(--k-alert-line)}
+.btn svg{width:15px;height:15px}
+
+.shell{display:grid;grid-template-columns:262px minmax(0,1fr);max-width:1500px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));gap:28px}
+nav.side{position:sticky;top:calc(71px + env(safe-area-inset-top,0px));align-self:start;max-height:calc(100vh - 71px - env(safe-area-inset-top,0px));overflow:auto;padding-block:22px 40px;scrollbar-width:thin}
+.side h3{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);font-weight:600;margin:18px 10px 6px}
+.side button.it{display:flex;width:100%;align-items:center;gap:9px;border:0;background:none;text-align:left;padding:6px 10px;border-radius:9px;font-size:13.8px;cursor:pointer;color:var(--ink)}
+.side button.it:hover{background:var(--surface)}
+.side button.it[aria-current="true"]{background:var(--surface);box-shadow:var(--shadow);font-weight:500}
+.side .dot{width:9px;height:9px;border-radius:50%;background:var(--cf);flex:none}
+.side .n{margin-left:auto;color:var(--faint);font-size:12px;font-variant-numeric:tabular-nums}
+main{min-width:0;padding-block:26px 80px}
+
+.hero{padding:30px 32px;border-radius:20px;background:var(--surface);box-shadow:var(--shadow);display:grid;gap:16px}
+.hero h1{margin:0;font-size:clamp(22px,3vw,30px);font-weight:600;line-height:1.2;text-wrap:balance}
+.hero p{margin:0;color:var(--muted);max-width:62ch}
+.try{display:flex;flex-wrap:wrap;gap:8px}
+.try button{border:1px dashed var(--line);background:var(--surface-2);border-radius:999px;padding:5px 13px;font-size:13px;cursor:pointer;color:var(--ink)}
+.try button:hover{border-style:solid;border-color:var(--accent);color:var(--accent)}
+.grid-cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-top:22px}
+.cat{border:0;text-align:left;cursor:pointer;background:var(--cb);color:var(--cf);border-radius:16px;padding:16px 18px;display:grid;gap:2px;min-height:96px;transition:transform .12s}
+.cat:hover{transform:translateY(-2px)}
+.cat b{font-weight:600;font-size:15px;line-height:1.3}
+.cat span{font-size:12.5px;opacity:.85}
+h2.blk{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:34px 0 10px}
+
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--cb);color:var(--cf);border-radius:999px;padding:2px 10px;font-size:12px;font-weight:500;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;border:0;cursor:pointer}
+.chip.plain{cursor:default}
+.list{display:grid;gap:8px}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:6px 14px;text-align:left;width:100%;border:1px solid var(--line);background:var(--surface);border-radius:var(--r);padding:12px 16px;cursor:pointer;color:var(--ink)}
+.row:hover{border-color:var(--accent)}
+.row .t{font-weight:500;min-width:0}
+.row .s{grid-column:1/-1;color:var(--muted);font-size:13px;min-width:0}
+.row .snip{grid-column:1/-1;font-size:13.5px;color:var(--ink);background:var(--surface-2);border-radius:8px;padding:8px 10px;line-height:1.5;min-width:0;overflow-wrap:anywhere}
+.row .snip i{display:block;font-style:normal;font-size:11.5px;color:var(--muted);letter-spacing:.03em;margin-bottom:2px}
+.rfilters{display:grid;gap:8px;margin:14px 0 8px}
+.rf-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.rf-lab{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;min-width:112px}
+.rf-row button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:13px;cursor:pointer;color:var(--ink)}
+.rf-row button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin-bottom:8px}
+.rcard{display:grid;gap:5px;align-content:start;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:14px 15px;cursor:pointer;color:var(--ink);border-left:5px solid #C9933F;transition:transform .12s,box-shadow .12s}
+.rcard:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.06)}
+.rcard b{font-size:15.5px;line-height:1.3}
+.rc-m{font-size:11.5px;font-weight:600;color:#93641C;text-transform:uppercase;letter-spacing:.04em}
+.rc-t{font-size:12.5px;color:var(--muted)}
+.rc-b{display:flex;flex-wrap:wrap;gap:4px}.rc-b i{font-style:normal;font-size:11.5px;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:1px 8px;color:var(--muted)}
+.rc-n{font-size:13px;color:var(--faint);font-weight:500}
+.rtags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}.rtags span{font-size:12.5px;border:1px solid var(--line);background:var(--surface-2);border-radius:999px;padding:3px 11px}
+.rtags span:first-child{background:#FCEFD9;color:#93641C;border-color:#F0D9B0;font-weight:600}
+ol.steps{counter-reset:st;list-style:none;padding:0;display:grid;gap:10px}
+ol.steps li{counter-increment:st;position:relative;padding-left:40px;line-height:1.55}
+ol.steps li::before{content:counter(st);position:absolute;left:0;top:-1px;width:27px;height:27px;border-radius:50%;background:#FCEFD9;color:#93641C;font-weight:700;font-size:13px;display:grid;place-items:center}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .rtags span:first-child,:root:not([data-theme="light"]) ol.steps li::before{background:#3A2E1C;color:#F0C987;border-color:#5A4628}:root:not([data-theme="light"]) .rc-m{color:#F0C987}}
+:root[data-theme="dark"] .rtags span:first-child,:root[data-theme="dark"] ol.steps li::before{background:#3A2E1C;color:#F0C987;border-color:#5A4628}:root[data-theme="dark"] .rc-m{color:#F0C987}
+@media (max-width:600px){.rf-lab{min-width:100%}.rgrid{grid-template-columns:1fr}}
+.pmode .top,.pmode nav.side,.pmode .mnav{display:none}
+.pmode .shell{grid-template-columns:minmax(0,1fr)}
+.cons{max-width:820px;margin:24px auto 60px;background:#fff;color:#2b2b2b;border-radius:18px;padding:34px 40px;box-shadow:0 4px 24px rgba(0,0,0,.06)}
+.cs-top{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.cs-head{background:#EAF3EC;border-radius:14px;padding:20px 24px;margin-bottom:18px}
+.cs-k{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#2F6B4E}
+.cs-head h1{font-size:28px;margin:4px 0 10px;color:#24543D}
+.cs-meta{display:flex;gap:28px;flex-wrap:wrap;font-size:13px;color:#555}
+.cs{break-inside:avoid;margin:0 0 14px;padding:12px 18px;border-radius:12px;border:1px solid #E4E7E1}
+.cs h2{font-size:15px;margin:0 0 6px;color:#2F6B4E}
+.cs ul{margin:0;padding-left:18px;font-size:13.5px;line-height:1.55}.cs li{margin:2px 0}.cs p{margin:0;font-size:13.5px}
+.cs.plus{background:#F3F8F4}.cs.moins{background:#FDF4EC;border-color:#F2DCC6}.cs.moins h2{color:#9A5A25}
+.cs.alert{background:#FCEEF1;border-color:#F2CCD5}.cs.alert h2{color:#9E3D55}
+.cs.blank .ln{border-bottom:1px dotted #B9C0B6;height:26px}
+.cs-foot{font-size:11.5px;color:#666;margin-top:18px;line-height:1.5}
+@media (max-width:600px){.cons{padding:20px 16px;margin:10px 0}}
+@media print{#main,#view,main{padding:0!important;margin:0!important;min-height:0!important}.noprint{display:none!important}body{background:#fff}.cons{box-shadow:none;margin:0;padding:0;max-width:none}.shell{padding:0}@page{margin:14mm}.cs{-webkit-print-color-adjust:exact;print-color-adjust:exact}.cs-head{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 18px}
+.filters button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 13px;font-size:13px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.res-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px}
+.res-h h1{font-size:22px;margin:0;font-weight:600}
+.res-h span{color:var(--muted);font-size:14px}
+.empty{padding:26px;border:1.5px dashed var(--line);border-radius:16px;color:var(--muted);background:var(--surface-2)}
+
+/* fiche */
+.fiche-wrap{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:34px}
+.fiche-wrap.notoc{grid-template-columns:minmax(0,1fr)}
+article.fiche{min-width:0;max-width:880px}
+.fhead{background:var(--cb);color:var(--cf);border-radius:20px;padding:24px 28px 22px;display:grid;gap:10px}
+.fhead .crumbs{display:flex;flex-wrap:wrap;gap:6px;font-size:12.5px;align-items:center}
+.fhead .crumbs button{background:rgba(255,255,255,.55);color:inherit;border:0;border-radius:999px;padding:2px 10px;cursor:pointer;font-size:12.5px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .fhead .crumbs button{background:rgba(0,0,0,.22)}}
+:root[data-theme="dark"] .fhead .crumbs button{background:rgba(0,0,0,.22)}
+.fhead h1{margin:0;font-size:clamp(22px,2.8vw,30px);line-height:1.22;font-weight:600;text-wrap:balance}
+.fhead .tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.fhead .tools .btn{background:rgba(255,255,255,.7);border-color:transparent;color:inherit}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .fhead .tools .btn{background:rgba(0,0,0,.25)}}
+:root[data-theme="dark"] .fhead .tools .btn{background:rgba(0,0,0,.25)}
+.badge{font-size:11.5px;border-radius:999px;padding:1px 9px;background:var(--k-perso-bg);color:var(--k-perso-ink);border:1px solid var(--k-perso-line)}
+.body{display:grid;gap:14px;margin-top:20px}
+.body h2{font-size:18px;font-weight:600;margin:16px 0 0;line-height:1.3;text-wrap:balance;scroll-margin-top:90px}
+.body p{margin:0;max-width:72ch}
+.body ul{margin:0;padding-left:20px;display:grid;gap:5px}
+.body li{padding-left:2px}
+.sec{border:1px solid var(--line);background:var(--surface);border-radius:var(--r);padding:14px 18px 15px;scroll-margin-top:90px}
+.sec h3{margin:0 0 7px;font-size:14px;font-weight:600;letter-spacing:.01em;display:flex;align-items:center;gap:8px}
+.sec h3 .ic{width:20px;height:20px;border-radius:6px;display:grid;place-items:center;font-size:11px;font-weight:700;flex:none}
+.k-alert{background:var(--k-alert-bg);border-color:var(--k-alert-line)} .k-alert h3{color:var(--k-alert-ink)}
+.k-med{background:var(--k-med-bg);border-color:var(--k-med-line)} .k-med h3{color:var(--k-med-ink)}
+.k-naturo{background:var(--k-nat-bg);border-color:var(--k-nat-line)} .k-naturo h3{color:var(--k-nat-ink)}
+.k-emo{background:var(--k-emo-bg);border-color:var(--k-emo-line)} .k-emo h3{color:var(--k-emo-ink)}
+.k-warn{background:var(--k-warn-bg);border-color:var(--k-warn-line)} .k-warn h3{color:var(--k-warn-ink)}
+.k-perso{background:var(--k-perso-bg);border-color:var(--k-perso-line)} .k-perso h3{color:var(--k-perso-ink)}
+.upd{background:var(--k-upd-bg);border:1px solid var(--k-upd-line);border-radius:var(--r);padding:11px 16px;font-size:14px}
+.upd b{color:var(--k-upd-ink);font-weight:600}
+.note{background:var(--k-note-bg);border:1px solid var(--k-note-line);border-radius:var(--r);padding:10px 15px;font-size:13.5px;color:var(--muted)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.tbl table{border-collapse:collapse;width:100%;font-size:14px}
+.tbl th{text-align:left;font-weight:600;font-size:12.5px;letter-spacing:.02em;background:var(--surface-2);color:var(--muted)}
+.tbl th,.tbl td{padding:9px 13px;vertical-align:top;border-bottom:1px solid var(--line)}
+.tbl tr:last-child td{border-bottom:0}
+.tbl td:first-child{font-weight:500;min-width:130px}
+.fig{background:#fff;border-radius:var(--r);border:1px solid var(--line);padding:10px;text-align:center}
+.fig img{max-width:100%;height:auto}
+.fig.map{padding:6px 6px 10px}.fig.map svg{display:block;width:100%;max-width:680px;height:auto;margin:0 auto}.fig.map figcaption{font-size:13px;color:var(--muted,#8a8278);margin-top:4px}.fig.map .org:focus{outline:none}
+.links{display:flex;flex-wrap:wrap;gap:7px}
+.toc{position:sticky;top:96px;align-self:start;font-size:13px;display:grid;gap:2px;max-height:calc(100vh - 120px);overflow:auto}
+.toc b{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);font-weight:600;margin-bottom:6px}
+.toc button{border:0;background:none;text-align:left;padding:4px 8px;border-radius:7px;cursor:pointer;color:var(--muted);line-height:1.35}
+.toc button:hover{background:var(--surface);color:var(--ink)}
+.cited{margin-top:34px}
+
+/* éditeur */
+.ov{position:fixed;inset:0;z-index:40;background:rgba(20,26,22,.42);display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.dlg{background:var(--surface);border-radius:20px;box-shadow:var(--shadow);width:min(1080px,100%);max-height:100%;display:grid;grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden}
+.dlg header,.dlg footer{padding:16px 22px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.dlg footer{border-bottom:0;border-top:1px solid var(--line);justify-content:flex-end}
+.dlg header h2{margin:0;font-size:18px;font-weight:600;margin-right:auto}
+.dlg .content{overflow:auto;padding:18px 22px;display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:22px}
+.form{display:grid;gap:12px;min-width:0}
+.form label{display:grid;gap:4px;font-size:12.5px;font-weight:500;color:var(--muted)}
+.form input,.form select,.form textarea{border:1px solid var(--line);background:var(--surface-2);border-radius:10px;padding:9px 12px;font-size:14px;color:var(--ink);width:100%}
+.form textarea{min-height:420px;font-size:13.5px;line-height:1.55;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;resize:vertical}
+.form .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.help{font-size:12.5px;color:var(--muted);background:var(--surface-2);border-radius:12px;padding:14px;align-self:start;display:grid;gap:7px}
+.help code{font-family:ui-monospace,Menlo,monospace;font-size:12px;background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:0 4px;color:var(--ink)}
+.help b{color:var(--ink)}
+.msg{font-size:13px;color:var(--muted);margin-right:auto}
+.msg.err{color:var(--k-alert-ink)}
+.confirm{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--k-alert-bg);border:1px solid var(--k-alert-line);border-radius:12px;padding:10px 14px;font-size:13.5px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--surface);padding:10px 18px;border-radius:999px;font-size:13.5px;z-index:50;box-shadow:var(--shadow)}
+.ro{font-size:12.5px;color:var(--muted);margin-top:8px}
+.mnav{display:none}
+
+@media (max-width:1180px){.fiche-wrap{grid-template-columns:minmax(0,1fr)}.toc{display:none}}
+@media (max-width:860px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0}
+  nav.side{display:none}
+  .mnav{display:flex;gap:8px;overflow-x:auto;padding:12px 0 2px;scrollbar-width:none}
+  .mnav button{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 13px;font-size:13px;cursor:pointer}
+  .brand span{display:none}
+  .top-in{gap:10px}
+  .hero{padding:22px}
+  .fhead{padding:20px}
+  .dlg .content{grid-template-columns:minmax(0,1fr)}
+  .form .two{grid-template-columns:minmax(0,1fr)}
+  #newBtn .lbl{display:none}
+  .search kbd{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.blk .lnk{all:unset;cursor:pointer;color:inherit;font:inherit}.blk .lnk:hover{text-decoration:underline}.blk .lnk:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+</style>
+
+<div class="top"><div class="top-in">
+  <button class="back" id="backBtn" hidden aria-label="Revenir à la page précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg><span>Retour</span></button>
+  <button class="brand" id="home" aria-label="Accueil">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="var(--accent-soft)"/><path d="M9 22c0-8 5-13 14-13-1 9-6 14-14 13Z" fill="var(--accent)"/><path d="M9.5 22.5 19 13" stroke="var(--surface)" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <span>Référentiel Naturo<small>Naturopathie</small></span>
+  </button>
+  <div class="search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="q" type="text" autocomplete="off" spellcheck="false" placeholder="Rechercher : SIBO, femme enceinte, millepertuis, sommeil…" aria-label="Rechercher dans les fiches">
+    <kbd id="kbd">⌘K</kbd>
+    <button class="clear" id="clr" hidden aria-label="Effacer la recherche">✕</button>
+  </div>
+  <button class="btn primary" id="newBtn" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span class="lbl">Nouvelle fiche</span></button>
+</div></div>
+
+<div class="shell">
+  <nav class="side" id="side" aria-label="Parcourir"></nav>
+  <main id="main"><div class="mnav" id="mnav"></div><div id="view"><div class="hero"><h1>Chargement des fiches…</h1><p>Le référentiel s'ouvre dans un instant.</p></div></div></main>
+</div>
+<div id="layer"></div>
+
+<script>
+(() => {
+"use strict";
+/* ---------------- couleurs des groupes ---------------- */
+const PAL = {
+  cardio:['#FBE2DF','#A2463F'], digestif:['#E9F1DF','#4F6E33'], neuro:['#ECEBF7','#57528C'], respi:['#E1EEF4','#36667E'],
+  osteo:['#F3EADF','#7A5A3A'], uro:['#E3EEF9','#3F6690'], masc:['#E6ECF2','#4A5D72'], fem:['#F8E3EA','#9E5468'], peau:['#FBEADF','#A8673F'],
+  'pop-enceinte':['#F8E3EA','#9E5468'], 'pop-nourrisson':['#FBF0D9','#8F6A1F'], 'pop-enfant':['#E4F1E0','#4A7444'], 'pop-ado':['#ECEBF7','#57528C'],
+  'pop-senior':['#E3EEF9','#3F6690'], 'pop-femme':['#FBE6DC','#A0563A'], plante:['#E3F0E8','#2F6B4E'], bach:['#F1E6F4','#7A4C86'],
+  routine:['#E0F1F0','#2E6F6B'], autre:['#EEEEEA','#5C5C52'], outil:['#E8EEF6','#3D5A80'],
+  'th-bach':['#F1E6F4','#7A4C86'], 'th-elixirs':['#FBE9EF','#9E4F6B'], 'th-aroma':['#E6F2EC','#2F6B4E'], 'th-gemmo':['#EAF2DE','#4F6E33'],
+  'th-sommeil':['#E5E9F7','#3F4E8C'], 'th-mental':['#ECEBF7','#57528C'], 'th-hydro':['#E1EEF4','#36667E'], 'th-exercice':['#FBE2DF','#A2463F'],
+  'th-gymorg':['#E0F1F0','#2E6F6B'], 'th-dietet':['#F6EFD8','#7E6620'], 'th-nutri':['#FCEEDD','#97602A'], 'th-cuisine':['#FBE6DC','#A0563A'],
+  'th-phyto':['#E3EFE1','#3E6B3A'], 'th-phytoapp':['#E8EEDD','#5A6B2E'], 'th-micro':['#FDEBD8','#A2582A'], 'th-myco':['#EEE6DD','#6B4F3A'], 'th-reflexo':['#FCE4E0','#A24D45'], 'th-manuel':['#F6E7DA','#8C5A33'], 'th-psycho':['#EFE4F3','#6E4A80'], 'th-pnei':['#E4EAF6','#3E5A8A'], 'th-respi':['#E0F0F5','#2F6A7C'], 'th-elim':['#E5F1E8','#3D6E4B'], 'th-posturo':['#EDEDE0','#5F6234'], 'th-antiinflam':['#FBE8DA','#A4552E'], recette:['#FCEFD9','#93641C'], contact:['#E6EEF5','#3B5F7E']
+};
+function hexToHsl(h){h=h.replace('#','');const r=parseInt(h.slice(0,2),16)/255,g=parseInt(h.slice(2,4),16)/255,b=parseInt(h.slice(4,6),16)/255;const mx=Math.max(r,g,b),mn=Math.min(r,g,b);let H=0,S=0;const L=(mx+mn)/2;if(mx!==mn){const d=mx-mn;S=L>.5?d/(2-mx-mn):d/(mx+mn);H=mx===r?(g-b)/d+(g<b?6:0):mx===g?(b-r)/d+2:(r-g)/d+4;H*=60}return [H,S*100,L*100]}
+function tint(col){const p=PAL[col]||PAL.autre;const [h,s]=hexToHsl(p[1]);return `--cb-l:${p[0]};--cf-l:${p[1]};--cb-d:hsl(${h} ${Math.min(s,40)}% 21%);--cf-d:hsl(${h} ${Math.min(s+10,60)}% 80%)`}
+
+/* ---------------- catégories ---------------- */
+const CATS = [
+  {k:'systeme',label:'Systèmes',one:'Système'},
+  {k:'pathologie',label:'Pathologies',one:'Pathologie'},
+  {k:'population',label:'Populations cibles',one:'Population cible'},
+  {k:'outil',label:'Outils et techniques',one:'Outil ou technique'},
+  {k:'plante',label:'Plantes et remèdes',one:'Plante ou remède'},
+  {k:'bach',label:'Fleurs de Bach et élixirs',one:'Fleur ou élixir'},
+  {k:'recette',label:'Recettes',one:'Recette'},
+  {k:'routine',label:'Routines et hygiène',one:'Routine et hygiène'},
+  {k:'contact',label:'Thérapeutes recommandés',one:'Thérapeute'},
+  {k:'autre',label:'Autres fiches',one:'Autre'}
+];
+const CATCOL = {contact:'contact',recette:'recette',plante:'plante',bach:'bach',routine:'routine',autre:'autre',outil:'outil'};
+const TOOLS = ['Fleurs de Bach','Élixirs floraux','Phytologie','Phytologie appliquée','Aromatologie','Gemmothérapie','Mycothérapie','Bio-nutrition','Micronutrition','Bio-diététique','Alimentation anti-inflammatoire','Cuisine saine','Sommeil','Gestion du stress','Psychologie','PNEI','Respiration et revitalisation','Exercice physique','Gymnastique des organes','Posturologie','Hydrologie',"Techniques d'élimination",'Réflexologie','Techniques manuelles'];
+const catLabel = k => (CATS.find(c=>c.k===k)||{label:k}).label;
+const catOne = k => (CATS.find(c=>c.k===k)||{one:k}).one;
+
+const KINDLAB = {alert:'!',med:'+',naturo:'N',emo:'♡',warn:'⚠',perso:'✎'};
+const KINDMARK = {alert:'alerte',med:'médical',naturo:'naturo',emo:'émotion',warn:'précaution',perso:'perso'};
+const MARKKIND = {alerte:'alert',medical:'med',naturo:'naturo',emotion:'emo',precaution:'warn',perso:'perso'};
+
+/* ---------------- utilitaires ---------------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const norm = s => String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/œ/g,'oe').replace(/æ/g,'ae').replace(/[’']/g,"'");
+const normH = s => String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const cap = s => s.charAt(0).toUpperCase()+s.slice(1);
+const slug = s => norm(s).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,60);
+const STOP = new Set(['de','la','le','les','des','du','et','en','a','au','aux','un','une','d','l','pour','sur','avec','dans']);
+function tokens(q){return norm(q).split(/[^a-z0-9]+/).filter(t=>t && !STOP.has(t))}
+const store = {get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+function toast(t){const el=document.createElement('div');el.className='toast';el.textContent=t;document.body.appendChild(el);setTimeout(()=>el.remove(),2600)}
+
+/* ---------------- état ---------------- */
+let BASE = new Map();      // fiches d'origine
+let OVR = new Map();       // modifications et ajouts (db)
+let ALL = [];              // fiches fusionnées
+let BYID = new Map(); let MAPS = {};
+let IDX = [];              // index de recherche
+let db = null, canWrite = false, dbReady = false;
+let view = {name:'home'}; let lastQuery = '';
+
+function merge(){
+  const m = new Map();
+  for (const [id,e] of BASE) m.set(id,{...e});
+  for (const [id,o] of OVR){
+    if (o.deleted){ m.delete(id); continue }
+    const b = BASE.get(id);
+    m.set(id, b ? {...b,...o,edited:true} : {...o,mine:true});
+  }
+  ALL = [...m.values()];
+  BYID = m;
+  buildIndex();
+}
+
+function blockTexts(e){
+  // segments (libellé de section, texte) pour la recherche et les extraits
+  const segs = []; let ctx = '';
+  for (const b of e.blocks||[]){
+    const k=b[0];
+    if (k==='h'){ctx=b[1];segs.push([ctx,b[1]])}
+    else if (k==='p'||k==='note') segs.push([ctx,b[1]]);
+    else if (k==='upd') segs.push(['Précision actuelle',b[1]]);
+    else if (k==='ul'||k==='ol') for (const t of b[1]) segs.push([ctx,t]);
+    else if (k==='tags') segs.push(['Étiquettes',b[1].join(' · ')]);
+    else if (k==='sec') for (const t of b[3]) segs.push([b[1],t]);
+    else if (k==='tb') for (const r of b[1]) segs.push([ctx,r.join(' · ')]);
+  }
+  return segs;
+}
+function buildIndex(){
+  IDX = ALL.map(e=>{
+    const segs = blockTexts(e);
+    return {e, t:norm(e.t), meta:norm([e.grp,e.sub,(e.al||[]).join(' '),catLabel(e.cat)].join(' ')), al:(e.al||[]).map(norm),
+            segs, segN:segs.map(s=>norm(s[1]))};
+  });
+}
+
+/* ---------------- recherche ---------------- */
+function search(q){
+  const toks = tokens(q); const phrase = norm(q).trim();
+  if (!toks.length) return {main:[],cited:[]};
+  const main=[], cited=[];
+  for (const x of IDX){
+    let s=0;
+    const inTitle = toks.every(t=>x.t.includes(t));
+    const inMeta = toks.every(t=>x.t.includes(t)||x.meta.includes(t));
+    if (x.t===phrase) s+=200;
+    else if (x.t.startsWith(phrase)) s+=120;
+    if (inTitle) s+=80 + (x.e.top?25:0);
+    if (x.al.some(a=>a===phrase)) s+=90 + (x.e.top?40:0) + (x.al[0]===phrase?30:0);
+    else if (inMeta) s+=40 + (x.e.top?20:0);
+    // occurrences dans le texte
+    let hits=0, first=-1, ph=false;
+    for (let i=0;i<x.segN.length;i++){
+      const n=x.segN[i];
+      if (toks.every(t=>n.includes(t))){hits++; if(first<0)first=i; if(n.includes(phrase))ph=true}
+    }
+    if (inTitle||inMeta){ main.push({x,s:s+Math.min(hits,10)}) }
+    else if (hits){ cited.push({x,s:hits*2+(ph?15:0),seg:first}) }
+  }
+  main.sort((a,b)=>b.s-a.s||a.x.e.t.localeCompare(b.x.e.t,'fr'));
+  cited.sort((a,b)=>b.s-a.s||a.x.e.t.localeCompare(b.x.e.t,'fr'));
+  for (const c of main){ // extrait si le texte contient aussi la requête
+    const i=c.x.segN.findIndex(n=>toks.every(t=>n.includes(t))); c.seg=i;
+  }
+  return {main,cited,toks};
+}
+function hl(text,toks){
+  let h=esc(text); if(!toks||!toks.length) return h;
+  const nt=normH(text); const marks=[];
+  for (const t of toks){let i=0;while((i=nt.indexOf(t,i))>=0){marks.push([i,i+t.length]);i+=t.length}}
+  if(!marks.length) return h;
+  marks.sort((a,b)=>a[0]-b[0]); const merged=[];
+  for(const m of marks){const l=merged[merged.length-1];if(l&&m[0]<=l[1])l[1]=Math.max(l[1],m[1]);else merged.push([...m])}
+  // norm() garde la même longueur que le texte d'origine pour les lettres latines courantes
+  let out='',p=0;for(const [a,b] of merged){out+=esc(text.slice(p,a))+'<mark>'+esc(text.slice(a,b))+'</mark>';p=b}
+  return out+esc(text.slice(p));
+}
+function snippet(text,toks){
+  const nt=normH(text); let i=-1; for(const t of toks){const j=nt.indexOf(t);if(j>=0&&(i<0||j<i))i=j}
+  if(i<0||text.length<=220) return hl(text.slice(0,220)+(text.length>220?'…':''),toks);
+  const a=Math.max(0,i-80), b=Math.min(text.length,i+150);
+  return (a>0?'…':'')+hl(text.slice(a,b),toks)+(b<text.length?'…':'');
+}
+
+/* ---------------- rendu : éléments communs ---------------- */
+function chip(e,label){return `<span class="chip tint plain" style="${tint(e.col)}">${esc(label)}</span>`}
+function rowHtml(x,toks,seg){
+  const e=x.e; const s=[e.sub&&e.sub!==e.grp?e.sub:'',catOne(e.cat)].filter(Boolean).join(' · ');
+  let snip='';
+  if (seg!=null && seg>=0){const sg=x.segs[seg]; snip=`<div class="snip">${sg[0]?`<i>${esc(sg[0])}</i>`:''}${snippet(sg[1],toks)}</div>`}
+  return `<button class="row" data-open="${esc(e.id)}"><span class="t">${toks?hl(e.t,toks):esc(e.t)}${e.mine?' <span class="badge">mon ajout</span>':e.edited?' <span class="badge">modifiée</span>':''}</span>${chip(e,e.grp||catLabel(e.cat))}<span class="s">${esc(s)}</span>${snip}</button>`;
+}
+
+/* ---------------- navigation latérale ---------------- */
+function groups(){
+  const g=new Map();
+  for (const e of ALL){const k=e.grp||catLabel(e.cat);if(!g.has(k))g.set(k,{name:k,cat:e.cat,col:e.col,n:0,top:null});const o=g.get(k);o.n++;if(e.top)o.top=e}
+  return g;
+}
+function renderSide(){
+  const g=groups(); const cur = view.name==='group'?view.grp:view.name==='fiche'?(BYID.get(view.id)||{}).grp:null;
+  const sys=[...g.values()].filter(x=>x.name.startsWith('Système')).sort((a,b)=>a.name.localeCompare(b.name,'fr'));
+  const pops=['Femme enceinte','Nouveau-né et nourrisson','Enfant','Adolescent','Plus de 50 ans','Cycle et contraception'].map(n=>g.get(n)).filter(Boolean);
+  const tools=TOOLS.map(n=>g.get(n)).filter(Boolean);
+  const cnt=k=>ALL.filter(e=>e.cat===k).length;
+  const it=(x)=>`<button class="it tint" style="${tint(x.col)}" data-grp="${esc(x.name)}" aria-current="${cur===x.name}"><span class="dot"></span>${esc(cap(x.name.replace('Système ','')))}<span class="n">${x.n}</span></button>`;
+  const catIt=(k)=>`<button class="it tint" style="${tint(CATCOL[k]||'autre')}" data-cat="${k}" aria-current="${view.name==='cat'&&view.cat===k}"><span class="dot"></span>${esc(catLabel(k))}<span class="n">${cnt(k)}</span></button>`;
+  const html = `<button class="it" data-home aria-current="${view.name==='home'}">Accueil</button>
+    <h3>Systèmes</h3>${sys.map(it).join('')}
+    <h3>Populations cibles</h3>${pops.map(it).join('')}
+    <h3>Outils et techniques</h3>${tools.map(it).join('')}
+    <h3>Ressources</h3>${['recette','contact','plante','bach','routine','autre'].map(catIt).join('')}
+    ${ALL.some(e=>e.mine||e.edited)?`<h3>Mes contributions</h3><button class="it" data-mine aria-current="${view.name==='mine'}">Ajouts et modifications<span class="n">${ALL.filter(e=>e.mine||e.edited).length}</span></button>`:''}`;
+  $('#side').innerHTML = html;
+  $('#mnav').innerHTML = `<button data-home>Accueil</button>${sys.concat(pops,tools).map(x=>`<button data-grp="${esc(x.name)}">${esc(cap(x.name.replace('Système ','')))}</button>`).join('')}${['recette','contact','plante','bach','routine'].map(k=>`<button data-cat="${k}">${esc(catLabel(k))}</button>`).join('')}`;
+}
+
+/* ---------------- vues ---------------- */
+let HIST=[];
+function sameView(a,b){return a&&b&&a.name===b.name&&a.id===b.id&&a.grp===b.grp&&a.cat===b.cat&&a.q===b.q}
+function go(v,push=true){
+  if(push&&view&&!sameView(view,v)){ if(view.name==='search'&&HIST.length&&HIST[HIST.length-1].name==='search') HIST.pop(); HIST.push({...view,sc:window.scrollY,rf:view.rf?JSON.parse(JSON.stringify(view.rf)):undefined}); if(HIST.length>60) HIST.shift() }
+  view=v;
+  if (push){
+    const h = v.name==='conseils'?'conseils-'+v.id : v.name==='fiche'?v.id : v.name==='group'?'g-'+slug(v.grp) : v.name==='cat'?'c-'+v.cat : v.name==='mine'?'mes-ajouts' : '';
+    if (v.name!=='search'){ try{ if(('#'+h)!==location.hash){ history.pushState(null,'',h?'#'+h:location.pathname+location.search) } }catch(e){ location.hash=h } }
+  }
+  render(true);
+}
+function goBack(){
+  const v=HIST.pop(); if(!v){ go({name:'home'},false); return }
+  view=v; qEl.value=v.name==='search'?(v.q||''):''; lastQuery=qEl.value.trim(); $('#clr').hidden=!qEl.value; $('#kbd').hidden=!!qEl.value;
+  const h = v.name==='conseils'?'conseils-'+v.id : v.name==='fiche'?v.id : v.name==='group'?'g-'+slug(v.grp) : v.name==='cat'?'c-'+v.cat : v.name==='mine'?'mes-ajouts' : '';
+  if(v.name!=='search'){ try{ history.replaceState(null,'',h?'#'+h:location.pathname+location.search) }catch(e){} }
+  render(true); if(v.sc) window.scrollTo({top:v.sc});
+}
+function render(scroll){
+  const bb=document.getElementById('backBtn'); if(bb) bb.hidden=!HIST.length;
+  renderSide();
+  const el=$('#view');
+  if (view.name==='search') el.innerHTML=vSearch(view.q);
+  else if (view.name==='fiche') el.innerHTML=vFiche(view.id);
+  else if (view.name==='group') el.innerHTML=vGroup(view.grp);
+  else if (view.name==='cat') el.innerHTML=vCat(view.cat);
+  else if (view.name==='mine') el.innerHTML=vMine();
+  else if (view.name==='conseils') el.innerHTML=vConseils(view.id);
+  else el.innerHTML=vHome();
+  document.body.classList.toggle('pmode',view.name==='conseils');
+  if (scroll && view.name!=='search') window.scrollTo({top:0});
+  if (scroll && view.name==='fiche' && view.hl){ const m=el.querySelector('article mark'); if(m) m.scrollIntoView({block:'center'}) }
+}
+
+function vHome(){
+  const g=groups(); const recent=store.get('recent',[]).map(id=>BYID.get(id)).filter(Boolean).slice(0,8);
+  const ord={systeme:0,population:1,outil:2};
+  const tiles=[...g.values()].filter(x=>x.top).sort((a,b)=>((ord[a.top.cat]??3)-(ord[b.top.cat]??3))||(a.top.cat==='outil'?TOOLS.indexOf(a.name)-TOOLS.indexOf(b.name):a.cat==='population'?0:a.name.localeCompare(b.name,'fr')));
+  const ex=['SIBO','Femme enceinte','Endométriose','Millepertuis','Choc émotionnel','Insomnie','Lavande vraie','Cohérence cardiaque','Jeûne','Gluten'];
+  return `<div class="hero"><h1>Le référentiel du naturopathe.</h1>
+    <p>${ALL.length} fiches : systèmes, pathologies, populations cibles, outils et techniques (fleurs de Bach, élixirs, huiles essentielles, bourgeons, nutrition, sommeil, stress, hydrologie, mouvement…), des recettes filtrables, avec à chaque fois le regard médical et l'accompagnement naturopathique. Tapez un mot : les fiches qui en traitent apparaissent en premier, puis tous les passages qui le citent ailleurs.</p>
+    <div class="try">${ex.map(t=>`<button data-try="${esc(t)}">${esc(t)}</button>`).join('')}</div>
+    ${canWrite?'':`<p class="ro">${dbReady?'Consultation seule : la modification des fiches est réservée à l\'éditrice du référentiel.':'Consultation seule pour l\'instant : la modification est disponible quand le référentiel est ouvert dans Claude avec le compte de l\'éditrice.'}</p>`}
+  </div>
+  <h2 class="blk">Parcourir</h2>
+  <div class="grid-cats">${tiles.map(x=>`<button class="cat tint" style="${tint(x.col)}" data-grp="${esc(x.name)}"><b>${esc(x.top.t)}</b><span>${x.n} fiches</span></button>`).join('')}
+    ${['recette','contact','plante','bach','routine'].map(k=>{const n=ALL.filter(e=>e.cat===k).length;return `<button class="cat tint" style="${tint(CATCOL[k])}" data-cat="${k}"><b>${esc(catLabel(k))}</b><span>${n?n+' fiches':'À compléter'}</span></button>`}).join('')}
+  </div>
+  ${recent.length?`<h2 class="blk">Consultées récemment</h2><div class="list">${recent.map(e=>rowHtml({e})).join('')}</div>`:''}`;
+}
+
+function vSearch(q){
+  const r=search(q); const toks=r.toks||[];
+  const f=view.filter||'all';
+  const all=[...r.main,...r.cited];
+  const counts={}; for(const c of all) counts[c.x.e.cat]=(counts[c.x.e.cat]||0)+1;
+  const keep=c=>f==='all'||c.x.e.cat===f;
+  const main=r.main.filter(keep), cited=r.cited.filter(keep);
+  if(!all.length) return `<div class="res-h"><h1>Aucun résultat pour « ${esc(q)} »</h1></div><div class="empty" style="margin-top:16px">Essayez un autre mot (singulier, synonyme) ou un mot plus court.${canWrite?` Tu peux aussi <button class="btn" data-new-title="${esc(q)}">créer une fiche « ${esc(q)} »</button>`:''}</div>`;
+  return `<div class="res-h"><h1>« ${esc(q)} »</h1><span>${main.length} fiche${main.length>1?'s':''} · cité dans ${cited.length} autre${cited.length>1?'s':''}</span></div>
+  <div class="filters"><button data-filter="all" aria-pressed="${f==='all'}">Tout · ${all.length}</button>${CATS.filter(c=>counts[c.k]).map(c=>`<button data-filter="${c.k}" aria-pressed="${f===c.k}">${esc(c.label)} · ${counts[c.k]}</button>`).join('')}</div>
+  ${main.length?`<h2 class="blk" style="margin-top:6px">Fiches</h2><div class="list">${main.slice(0,80).map(c=>rowHtml(c.x,toks,c.seg)).join('')}</div>`:''}
+  ${cited.length?`<h2 class="blk">Cité dans</h2><div class="list">${cited.slice(0,150).map(c=>rowHtml(c.x,toks,c.seg)).join('')}</div>`:''}`;
+}
+
+function vGroup(grp){
+  const es=ALL.filter(e=>(e.grp||catLabel(e.cat))===grp);
+  if(!es.length) return `<div class="empty">Aucune fiche dans ce groupe.</div>`;
+  const top=es.find(e=>e.top); const col=(top||es[0]).col;
+  const subs=new Map(); for(const e of es){ if(e.top) continue; const k=e.sub&&!/Vue d'ensemble/.test(e.sub)?(e.cat==='pathologie'?'Pathologies'+(e.sub&&e.sub!==grp?' · '+e.sub:''):e.sub):catLabel(e.cat); if(!subs.has(k))subs.set(k,[]); subs.get(k).push(e) }
+  return `<div class="fhead tint" style="${tint(col)}"><div class="crumbs">${esc(catLabel(es[0].cat))}</div><h1>${esc(top?top.t:grp)}</h1>
+    <div class="tools">${top?`<button class="btn" data-open="${esc(top.id)}">Ouvrir la vue d'ensemble</button>`:''}${canWrite?`<button class="btn" data-new-grp="${esc(grp)}" data-new-cat="${esc(es[0].cat)}">Ajouter une fiche ici</button>`:''}</div></div>
+    ${[...subs.entries()].map(([k,l])=>`<h2 class="blk">${esc(k)}</h2><div class="list">${l.sort((a,b)=>a.t.localeCompare(b.t,'fr')).map(e=>rowHtml({e})).join('')}</div>`).join('')}`;
+}
+function vCat(cat){
+  const es=ALL.filter(e=>e.cat===cat).sort((a,b)=>a.t.localeCompare(b.t,'fr'));
+  const head=`<div class="fhead tint" style="${tint(CATCOL[cat]||'autre')}"><h1>${esc(catLabel(cat))}</h1>
+    <div class="tools">${canWrite?`<button class="btn" data-new-cat="${cat}">Ajouter une fiche</button>`:''}</div></div>`;
+  if(!es.length){
+    const hint={
+      routine:"Les routines naturelles arrivent bientôt : hygiène bucco-dentaire (bain de bouche à l'huile de coco), hygiène corporelle et intime, sommeil…",
+      autre:"Les fiches qui ne rentrent dans aucune autre rubrique."}[cat]||'';
+    return head+`<div class="empty" style="margin-top:18px">${esc(hint)}</div>`;
+  }
+  if(cat==='recette') return head+vRecettes(es);
+  let body='';
+  if(cat==='plante'){
+    const L=new Map(); for(const e of es){const l=norm(e.t)[0].toUpperCase();if(!L.has(l))L.set(l,[]);L.get(l).push(e)}
+    body=[...L.entries()].map(([l,a])=>`<h2 class="blk">${esc(l)}</h2><div class="links">${a.map(e=>`<button class="chip tint" style="${tint(e.col)}" data-open="${esc(e.id)}">${esc(e.t)}</button>`).join('')}</div>`).join('');
+    body=`<p class="note" style="margin-top:18px">Index généré à partir des tableaux de plantes de chaque système. Pour tout ce qui concerne une plante, tapez son nom dans la recherche : chaque fiche qui la cite apparaît aussi.</p>`+body;
+  } else if(cat==='outil'||cat==='bach'){
+    const G=new Map(); for(const e of es){const k=e.grp||catLabel(cat);if(!G.has(k))G.set(k,[]);G.get(k).push(e)}
+    const keys=[...G.keys()].sort((x,y)=>{const i=TOOLS.indexOf(x),j=TOOLS.indexOf(y);return (i<0?99:i)-(j<0?99:j)||x.localeCompare(y,'fr')});
+    body=keys.map(k=>`<h2 class="blk"><button class="lnk" data-grp="${esc(k)}">${esc(k)}</button></h2><div class="links">${G.get(k).filter(e=>!e.top).map(e=>`<button class="chip tint" style="${tint(e.col)}" data-open="${esc(e.id)}">${esc(e.t)}</button>`).join('')}</div>`).join('');
+  } else body=`<div class="list" style="margin-top:18px">${es.map(e=>rowHtml({e})).join('')}</div>`;
+  return head+body;
+}
+const RF={
+  m:['Moment',['Petit-déjeuner','Déjeuner','Dîner','Collation et dessert','Boisson','Bases et sauces']],
+  r:['Régime',['Vegan','Végétarien','Sans gluten','Sans lactose','IG bas']],
+  o:['Objectif',['Anti-inflammatoire','Confort digestif','Détox douce','Satiété et poids','Énergie','Immunité','Peau','Sportif','Sommeil et détente']],
+  s:['Saison',['Printemps','Été','Automne','Hiver']],
+  a:['Sans allergène',['Fruits à coque','Arachide','Soja','Œuf','Sésame','Poisson','Crustacés']]
+};
+function recMeta(e){
+  const tags=((e.blocks||[]).find(b=>b[0]==='tags')||['',[]])[1];
+  const ob=(e.blocks||[]).find(b=>b[0]==='p'&&/^Objectifs\s*:/.test(b[1]));
+  const obj=ob?ob[1].replace(/^Objectifs\s*:\s*/,'').replace(/\.$/,'').split(',').map(s=>s.trim()):((e.rc||{}).o||[]);
+  let alg=[]; for(const b of e.blocks||[]) if(b[0]==='sec') for(const l of b[3]) if(/^Allergènes\s*:/.test(l)) alg=l.replace(/^Allergènes\s*:\s*/,'').replace(/\.$/,'').split(',').map(s=>norm(s.trim()));
+  const regV=new Set(tags); if(regV.has('Vegan')) regV.add('Végétarien');
+  return {m:RF.m[1].find(x=>tags.includes(x))||e.grp, tags, reg:regV, obj, alg,
+          time:tags.find(t=>/\d/.test(t)&&/min|h\b|Repères/.test(t))||tags[1]||'',
+          sais:tags.filter(t=>RF.s[1].includes(t)||t==="Toute l'année")};
+}
+function vRecettes(es){
+  const f=view.rf||(view.rf={m:'',r:[],o:'',s:'',a:[]});
+  const ok=e=>{const x=recMeta(e);
+    if(f.m&&x.m!==f.m) return false;
+    if(f.r.some(r=>!x.reg.has(r))) return false;
+    if(f.o&&!x.obj.includes(f.o)) return false;
+    if(f.s&&!(x.sais.includes(f.s)||x.sais.includes("Toute l'année")||!x.sais.length)) return false;
+    if(f.a.some(a=>x.alg.includes(norm(a)))) return false;
+    return true};
+  const L=es.filter(ok);
+  const multi=k=>k==='r'||k==='a';
+  const on=(k,v)=>multi(k)?f[k].includes(v):f[k]===v;
+  const rows=Object.entries(RF).map(([k,[lab,vals]])=>`<div class="rf-row"><span class="rf-lab">${esc(lab)}</span>${!multi(k)?`<button data-rf="${k}|" aria-pressed="${!f[k]}">Tout</button>`:''}${vals.map(v=>`<button data-rf="${k}|${esc(v)}" aria-pressed="${on(k,v)}">${esc(v)}</button>`).join('')}</div>`).join('');
+  const any=f.m||f.o||f.s||f.r.length||f.a.length;
+  const card=e=>{const x=recMeta(e);const badges=['Vegan','Végétarien','Sans gluten','Sans lactose','IG bas'].filter(r=>x.tags.includes(r));
+    return `<button class="rcard" data-open="${esc(e.id)}"><span class="rc-m">${esc(x.m)}</span><b>${esc(e.t)}</b><span class="rc-t">${esc(x.time)}</span><span class="rc-b">${badges.map(b=>`<i>${esc(b)}</i>`).join('')}</span></button>`};
+  let body;
+  if(!L.length) body=`<div class="empty" style="margin-top:12px">Aucune recette ne correspond à cette combinaison. <button class="btn" data-rf-reset>Effacer les filtres</button></div>`;
+  else if(f.m) body=`<div class="rgrid">${L.map(card).join('')}</div>`;
+  else body=RF.m[1].map(m=>{const l=L.filter(e=>recMeta(e).m===m);return l.length?`<h2 class="blk">${esc(m)} <span class="rc-n">${l.length}</span></h2><div class="rgrid">${l.map(card).join('')}</div>`:''}).join('')+(()=>{const l=L.filter(e=>!RF.m[1].includes(recMeta(e).m));return l.length?`<h2 class="blk">Autres</h2><div class="rgrid">${l.map(card).join('')}</div>`:''})();
+  return `<p class="note" style="margin-top:16px">Recettes d'inspiration naturopathique, reformulées à partir des livrets cités sur chaque fiche. Les filtres se combinent ; « Sans allergène » masque les recettes qui contiennent l'allergène choisi (vérifiez toujours les étiquettes des produits).</p>
+  <div class="rfilters">${rows}</div>
+  <div class="res-h"><h1 style="font-size:20px">${L.length} recette${L.length>1?'s':''}</h1>${any?`<button class="btn" data-rf-reset>Effacer les filtres</button>`:''}</div>${body}`;
+}
+function vConseils(id){
+  const e=BYID.get(id);
+  if(!e) return `<div class="empty">Fiche introuvable.</div>`;
+  const bl=e.blocks||[]; const start=bl.findIndex(b=>b[0]==='h'&&/^Boîte à outils/.test(b[1]));
+  const S={}; let recs=[];
+  for(let i=start+1;i<bl.length;i++){const b=bl[i]; if(b[0]==='sec') S[b[1]]=(S[b[1]]||[]).concat(b[3]);
+    if(b[0]==='h'&&b[1]==='Recettes adaptées'&&bl[i+1]&&bl[i+1][0]==='links') recs=bl[i+1][1].map(x=>BYID.get(x)).filter(Boolean).map(x=>x.t)}
+  const alert=[]; for(const b of bl){ if(b[0]==='sec'&&/^Surveillance et signes d'alerte/.test(b[1])) alert.push(...b[3]) }
+  for(const l of (S['Vers qui orienter']||[])) if(/^(Urgences?|Consulter|Avis rapide|Avis médical rapide)/.test(l)) alert.push(l);
+  const pick=(...ks)=>ks.flatMap(k=>Object.keys(S).filter(t=>t.startsWith(k)).flatMap(t=>S[t]));
+  const blk=(t,L,cls='')=>L.length?`<section class="cs ${cls}"><h2>${esc(t)}</h2><ul>${L.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></section>`:'';
+  const blank=(t,n)=>`<section class="cs blank"><h2>${esc(t)}</h2>${'<div class="ln"></div>'.repeat(n)}</section>`;
+  return `<div class="cons">
+  <div class="cs-top noprint"><button class="btn primary" onclick="window.print()">Imprimer ou enregistrer en PDF</button><a class="btn" href="#${esc(id)}">Retour à la fiche</a></div>
+  <header class="cs-head"><div class="cs-k">Fiche conseils naturopathiques</div><h1>${esc(e.t)}</h1>
+    <div class="cs-meta"><span>Nom : ........................................</span><span>Date : ....................</span></div></header>
+  ${blank('Mes priorités pour les prochaines semaines',5)}
+  ${blk('Dans mon assiette : à privilégier',pick('Alimentation à privilégier'),'plus')}
+  ${blk('Dans mon assiette : à limiter',pick('Alimentation à limiter'),'moins')}
+  ${recs.length?`<section class="cs"><h2>Idées de recettes</h2><p>${recs.map(esc).join(' · ')}</p></section>`:''}
+  ${blk('Bouger',pick('Activité physique'),'plus')}
+  ${blk('Précautions pour bouger',pick("Précautions pour l'activité"),'moins')}
+  ${blk('Stress, sommeil et récupération',pick('Stress'),'plus')}
+  ${blk('Mon environnement au quotidien',pick('Environnement'),'plus')}
+  ${blk("Les techniques d'hygiène vitale à faire chez soi",pick('Hydrologie'),'plus')}
+  ${blk('Précautions pour ces techniques',pick("Précautions pour l'hydrologie"),'moins')}
+  ${blank('Plantes, compléments ou fleurs proposés (dose, moment, durée)',4)}
+  ${blk('Consulter sans attendre si',alert,'alert')}
+  ${blank('Prochain rendez-vous et notes',2)}
+  <p class="cs-foot">Ces conseils d'hygiène de vie accompagnent le suivi médical et ne le remplacent pas. Ne jamais arrêter ni modifier un traitement sans l'avis du médecin. Avant de prendre une plante ou un complément, signaler tout traitement en cours, une grossesse ou un allaitement.</p>
+  </div>`;
+}
+function vMine(){
+  const es=ALL.filter(e=>e.mine||e.edited).sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0));
+  return `<div class="res-h"><h1>Ajouts et modifications</h1><span>${es.length}</span></div><div class="list" style="margin-top:14px">${es.map(e=>rowHtml({e})).join('')||'<div class="empty">Aucun ajout pour l’instant.</div>'}</div>`;
+}
+
+function blocksHtml(blocks,toks){
+  const H=(t)=>hl(t,toks).replace(/(https?:\/\/[^\s<]+)/g,(u)=>{const c=u.replace(/<\/?mark>/g,'');return `<a href="${c}" target="_blank" rel="noopener">${c.replace(/^https?:\/\/(www\.)?/,'').split('/')[0]}</a>`});
+  let out=''; let n=0;
+  for(const b of blocks||[]){
+    const k=b[0];
+    if(k==='h'){out+=`<h2 id="s${n++}">${H(b[1])}</h2>`}
+    else if(k==='p'){out+=`<p>${H(b[1])}</p>`}
+    else if(k==='ul'){out+=`<ul>${b[1].map(t=>`<li>${H(t)}</li>`).join('')}</ul>`}
+    else if(k==='ol'){out+=`<ol class="steps">${b[1].map(t=>`<li>${H(t)}</li>`).join('')}</ol>`}
+    else if(k==='tags'){out+=`<div class="rtags">${b[1].map(t=>`<span>${esc(t)}</span>`).join('')}</div>`}
+    else if(k==='note'){out+=`<div class="note">${H(b[1])}</div>`}
+    else if(k==='upd'){out+=`<div class="upd"><b>Précision actuelle · </b>${H(b[1])}</div>`}
+    else if(k==='sec'){const kd=b[2]||'normal';out+=`<section class="sec k-${kd}" id="s${n++}"><h3>${KINDLAB[kd]?`<span class="ic">${KINDLAB[kd]}</span>`:''}${H(b[1])}</h3>${b[3].length>1?`<ul>${b[3].map(t=>`<li>${H(t)}</li>`).join('')}</ul>`:`<p>${H(b[3][0]||'')}</p>`}</section>`}
+    else if(k==='tb'){out+=`<div class="tbl"><table>${b[2]?`<thead><tr>${b[2].map(c=>`<th>${esc(c)}</th>`).join('')}</tr></thead>`:''}<tbody>${b[1].map(r=>`<tr>${r.map(c=>`<td>${H(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`}
+    else if(k==='map'){out+=MAPS[b[1]]?`<figure class="fig map">${MAPS[b[1]]}<figcaption>Touchez un organe pour ouvrir sa fiche</figcaption></figure>`:''}
+    else if(k==='img'){out+=`<figure class="fig"><img loading="lazy" src="img/${esc(String(b[1]).replace(/\.png$/,'.webp'))}" alt="Schéma"></figure>`}
+    else if(k==='links'){const ls=b[1].map(id=>BYID.get(id)).filter(Boolean);out+=`<div class="links">${ls.map(e=>`<button class="chip tint" style="${tint(e.col)}" data-open="${esc(e.id)}">${esc(e.t)}</button>`).join('')}</div>`}
+  }
+  return out;
+}
+function tocOf(blocks){const t=[];let n=0;for(const b of blocks||[]){if(b[0]==='h')t.push([n++,b[1]]);else if(b[0]==='sec')t.push([n++,b[1]])}return t}
+
+function seeAlso(e){
+  // fiches dont le nom apparaît dans cette fiche
+  const txt=norm(blockTexts(e).map(s=>s[1]).join(' \n '));
+  const out=[];
+  for(const o of ALL){
+    if(o.id===e.id||o.top) continue;
+    if(!(o.cat==='pathologie'||o.cat==='plante'||o.cat==='bach'||o.cat==='routine'||(o.cat==='outil'&&o.grp!==e.grp))) continue;
+    const key=norm(o.t.split(' (')[0].split(' · ')[0]).trim();
+    if(key.length<5) continue;
+    const re=new RegExp('(^|[^a-z])'+key.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'([^a-z]|$)');
+    if(re.test(txt)) out.push(o);
+  }
+  return out.slice(0,40);
+}
+function vFiche(id){
+  const e=BYID.get(id);
+  if(!e) return `<div class="empty">Cette fiche n'existe plus. <button class="btn" data-home>Retour à l'accueil</button></div>`;
+  try{const r=store.get('recent',[]).filter(x=>x!==id);r.unshift(id);store.set('recent',r.slice(0,20))}catch(err){}
+  const toks=view.hl?tokens(view.hl):null;
+  const toc=tocOf(e.blocks);
+  const also=seeAlso(e);
+  const key=e.t.split(' (')[0].split(' · ')[0];
+  const cit=e.box?[]:(e.cat==='pathologie'||e.cat==='plante'||e.cat==='bach'||e.cat==='routine'||e.cat==='outil'||e.top)?search(e.top?(e.al&&e.al[0])||key:key).cited.filter(c=>c.x.e.id!==id&&!c.x.e.top).slice(0,30):[];
+  const crumbs=[catLabel(e.cat), e.grp, e.sub&&e.sub!==e.grp&&!/Vue d'ensemble|Index/.test(e.sub)?e.sub:''].filter(Boolean);
+  const tools = (e.box?`<a class="btn primary cbtn" href="#conseils-${esc(id)}" target="_blank" rel="noopener">Fiche conseils à imprimer</a>`:'')+(canWrite?`<button class="btn" data-edit="${esc(id)}">Modifier</button><button class="btn" data-note="${esc(id)}">Ajouter une note</button>${e.edited?`<button class="btn" data-restore="${esc(id)}">Version d'origine</button>`:''}${e.mine?`<button class="btn" data-del="${esc(id)}">Supprimer</button>`:''}`:'');
+  return `<div class="fiche-wrap${toc.length>2?'':' notoc'}"><article class="fiche">
+    <header class="fhead tint" style="${tint(e.col)}">
+      <div class="crumbs">${crumbs.map((c,i)=>i===1?`<button data-grp="${esc(e.grp)}">${esc(c)}</button>`:`<span>${esc(c)}</span>`).join('<span>›</span>')}${e.mine?' <span class="badge">mon ajout</span>':e.edited?' <span class="badge">modifiée</span>':''}</div>
+      <h1>${esc(e.t)}</h1>
+      ${tools?`<div class="tools">${tools}</div>`:''}
+      <div id="confirm"></div>
+    </header>
+    <div class="body">${blocksHtml(e.blocks,toks)}</div>
+    ${also.length?`<h2 class="blk">Voir aussi</h2><div class="links">${also.map(o=>`<button class="chip tint" style="${tint(o.col)}" data-open="${esc(o.id)}">${esc(o.t)}</button>`).join('')}</div>`:''}
+    ${cit.length?`<div class="cited"><h2 class="blk">« ${esc(e.top?(e.al&&e.al[0])||key:key)} » est aussi cité dans</h2><div class="list">${cit.map(c=>rowHtml(c.x,tokens(e.top?(e.al&&e.al[0])||key:key),c.seg)).join('')}</div></div>`:''}
+  </article>
+  ${toc.length>2?`<aside class="toc"><b>Sommaire</b>${toc.map(([n,t])=>`<button data-toc="s${n}">${esc(t)}</button>`).join('')}</aside>`:''}</div>`;
+}
+
+/* ---------------- édition : texte <-> blocs ---------------- */
+function toText(blocks){
+  const L=[];
+  for(const b of blocks||[]){
+    const k=b[0];
+    if(k==='h')L.push('## '+b[1]);
+    else if(k==='p')L.push(b[1]);
+    else if(k==='ul')b[1].forEach(t=>L.push('- '+t));
+    else if(k==='ol')b[1].forEach((t,i)=>L.push((i+1)+'. '+t));
+    else if(k==='tags')L.push('[étiquettes: '+b[1].join(' | ')+']');
+    else if(k==='note')L.push('> '+b[1]);
+    else if(k==='upd')L.push('>> '+b[1]);
+    else if(k==='sec'){L.push('### '+(KINDMARK[b[2]]?'['+KINDMARK[b[2]]+'] ':'')+b[1]);b[3].forEach(t=>L.push('- '+t))}
+    else if(k==='tb'){if(b[2])L.push('|| '+b[2].join(' | '));b[1].forEach(r=>L.push('| '+r.join(' | ')))}
+    else if(k==='img')L.push('[image: '+b[1]+']');
+    else if(k==='map')L.push('[schéma interactif: '+b[1]+']');
+    else if(k==='links')L.push('@ '+b[1].join(', '));
+    L.push('');
+  }
+  return L.join('\n').replace(/\n{3,}/g,'\n\n').trim();
+}
+function fromText(txt){
+  const out=[]; let sec=null, ul=null, tb=null, ol=null;
+  const close=()=>{sec=null;ul=null;tb=null;ol=null};
+  for(const raw of txt.split('\n')){
+    const l=raw.trim();
+    if(!l){ if(ul) ul=null; if(tb) tb=null; continue }
+    let m;
+    if((m=l.match(/^###\s*(?:\[([^\]]+)\]\s*)?(.*)$/))){close();const kd=m[1]?(MARKKIND[norm(m[1]).trim()]||'normal'):(/signes d'alerte/i.test(m[2])?'alert':'normal');sec=['sec',m[2].trim(),kd,[]];out.push(sec);continue}
+    if((m=l.match(/^##\s*(.*)$/))){close();out.push(['h',m[1].trim()]);continue}
+    if((m=l.match(/^>>\s*(.*)$/))){close();out.push(['upd',m[1]]);continue}
+    if((m=l.match(/^>\s*(.*)$/))){close();out.push(['note',m[1]]);continue}
+    if((m=l.match(/^\|\|\s*(.*)$/))){sec=null;ul=null;tb=['tb',[],m[1].split('|').map(s=>s.trim())];out.push(tb);continue}
+    if((m=l.match(/^\|\s*(.*)$/))){sec=null;ul=null;if(!tb){tb=['tb',[],null];out.push(tb)}tb[1].push(m[1].replace(/\|\s*$/,'').split('|').map(s=>s.trim()));continue}
+    if((m=l.match(/^\[image:\s*(.*)\]$/))){close();out.push(['img',m[1].trim()]);continue}
+    if((m=l.match(/^\[schéma interactif:\s*(.*)\]$/))){close();out.push(['map',m[1].trim()]);continue}
+    if((m=l.match(/^\[étiquettes:\s*(.*)\]$/))){close();out.push(['tags',m[1].split('|').map(s=>s.trim()).filter(Boolean)]);continue}
+    if(!sec&&(m=l.match(/^\d+[.)]\s+(.*)$/))){ul=null;tb=null;if(!ol){ol=['ol',[]];out.push(ol)} ol[1].push(m[1]);continue}
+    if((m=l.match(/^@\s*(.*)$/))){close();out.push(['links',m[1].split(',').map(s=>s.trim()).filter(Boolean)]);continue}
+    if((m=l.match(/^[-•*]\s+(.*)$/))){ if(sec){sec[3].push(m[1])} else {if(!ul){ul=['ul',[]];out.push(ul)} ul[1].push(m[1])} continue }
+    if(sec){ sec[3].push(l); continue }
+    ul=null; tb=null; out.push(['p',l]);
+  }
+  return out.filter(b=>!(b[0]==='sec'&&!b[3].length&&false));
+}
+const TEMPLATES = {
+  pathologie:`### Définition / mécanisme\n- \n\n### Terrain et causes favorisantes\n- \n\n### Symptômes\n- \n\n### Évolution et complications\n- \n\n### [alerte] Surveillance et signes d'alerte\n- \n\n### [médical] Marqueurs biologiques à surveiller\n- \n\n### Questions à poser en anamnèse\n- \n\n### [médical] Prise en charge médicale\n- \n\n### [médical] Prise en charge médicamenteuse\n- \n\n### [naturo] Prise en charge naturopathique\n- \n\n### [précaution] Interactions et contre-indications\n- \n\n### [émotion] Origine émotionnelle (Jacques Martel)\n- `,
+  plante:`### Nom latin, famille, parties utilisées\n- \n\n### Propriétés\n- \n\n### [naturo] Indications\n- \n\n### Formes et posologies\n- \n\n### [précaution] Contre-indications et précautions\n- \n\n### [précaution] Interactions médicamenteuses\n- \n\n### Grossesse, allaitement, enfants\n- `,
+  bach:`### État émotionnel\n- \n\n### Mots-clés\n- \n\n### [naturo] Indications\n- \n\n### Utilisation\n- 4 gouttes 4 fois par jour, ou 2 gouttes dans un flacon de 30 mL\n\n### Associations fréquentes\n- `,
+  outil:`### Principe\n- \n\n### [naturo] En pratique\n- \n\n### Pour qui\n- \n\n### [précaution] Précautions\n- \n\n### [alerte] Surveillance et signes d'alerte\n- `,
+  routine:`### Pourquoi\n- \n\n### [naturo] Comment faire\n- \n\n### Fréquence\n- \n\n### [précaution] Précautions\n- \n\n### [médical] Le regard médical\n- `,
+  population:`### Repères\n- \n\n### [médical] Suivi médical et marqueurs\n- \n\n### [alerte] Surveillance et signes d'alerte\n- \n\n### [naturo] Accompagnement naturopathique\n- `,
+  recette:`[étiquettes: Petit-déjeuner | 10 min · 2 personnes | Vegan | Sans gluten | Toute l'année]\n\nObjectifs : Anti-inflammatoire.\n\n## Ingrédients\n- \n\n## Préparation\n1. \n2. \n\n### [naturo] Pourquoi en naturopathie\n- \n\n### Variantes\n- \n\n### [précaution] Précautions\n- \n\n> Source : `,
+  contact:`[étiquettes: Métier | Ville]\n\n### [naturo] Spécialités\n- \n\n### [médical] Coordonnées\n- Adresse : \n- Prendre rendez-vous : https://\n- Téléphone : \n- Mail : \n\n## Fiches où penser à orienter\n@ `,
+  systeme:`## Rôle\n\n### Anatomie\n- \n\n### Physiologie\n- `,
+  autre:`### \n- `
+};
+
+function openEditor(opts){
+  // opts : {id} pour modifier ; {cat, grp, title} pour créer
+  const e = opts.id?BYID.get(opts.id):null;
+  const cat = e?e.cat:(opts.cat||'autre');
+  const grps=[...new Set(ALL.map(x=>x.grp).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'fr'));
+  $('#layer').innerHTML=`<div class="ov" id="ov"><form class="dlg" id="edf">
+    <header><h2>${e?'Modifier la fiche':'Nouvelle fiche'}</h2><button type="button" class="btn ghost" data-close>Fermer</button></header>
+    <div class="content"><div class="form">
+      <label>Titre<input id="f-t" required value="${esc(e?e.t:(opts.title||''))}"></label>
+      <div class="two">
+        <label>Rubrique<select id="f-cat">${CATS.map(c=>`<option value="${c.k}"${c.k===cat?' selected':''}>${esc(c.label)}</option>`).join('')}</select></label>
+        <label>Groupe (système, population…)<input id="f-grp" list="f-grps" value="${esc(e?e.grp||'':(opts.grp||''))}" placeholder="ex. Système digestif"><datalist id="f-grps">${grps.map(g=>`<option value="${esc(g)}">`).join('')}</datalist></label>
+      </div>
+      <label>Mots-clés et synonymes (séparés par des virgules)<input id="f-al" value="${esc(e?(e.al||[]).join(', '):'')}" placeholder="ex. stress, choc, traumatisme"></label>
+      <label>Contenu<textarea id="f-body" spellcheck="true">${esc(e?toText(e.blocks):(TEMPLATES[cat]||TEMPLATES.autre))}</textarea></label>
+    </div>
+    <aside class="help"><b>Mise en forme</b>
+      <div><code>## Titre</code> grand titre</div>
+      <div><code>### Titre</code> encadré de section, suivi de lignes <code>- point</code></div>
+      <div>Couleur d'encadré : <code>### [alerte] …</code> rose, <code>[médical]</code> bleu, <code>[naturo]</code> vert, <code>[émotion]</code> lavande, <code>[précaution]</code> orange, <code>[perso]</code> turquoise</div>
+      <div><code>- point</code> liste à puces</div>
+      <div><code>&gt;&gt; texte</code> note de mise à jour (jaune)</div>
+      <div><code>&gt; texte</code> remarque (grise)</div>
+      <div><code>|| Col 1 | Col 2</code> en-tête de tableau, puis <code>| a | b</code></div>
+      <div>Une ligne simple devient un paragraphe.</div>
+      <div style="margin-top:6px">Les mots-clés servent à la recherche : une fleur de Bach avec le mot-clé « choc émotionnel » ressortira quand on cherche ces mots.</div>
+    </aside></div>
+    <footer><span class="msg" id="f-msg"></span><button type="button" class="btn" data-close>Annuler</button><button class="btn primary" type="submit">Enregistrer</button></footer>
+  </form></div>`;
+  const catSel=$('#f-cat'), body=$('#f-body');
+  if(!e){ catSel.addEventListener('change',()=>{ const cur=body.value.trim(); const isTpl=Object.values(TEMPLATES).some(t=>t.trim()===cur)||!cur; if(isTpl) body.value=TEMPLATES[catSel.value]||TEMPLATES.autre }) }
+  $('#f-t').focus();
+  $('#edf').addEventListener('submit',async ev=>{
+    ev.preventDefault();
+    const t=$('#f-t').value.trim(); if(!t){$('#f-msg').textContent='Donnez un titre à la fiche.';return}
+    const c=catSel.value; const grp=$('#f-grp').value.trim()||catLabel(c);
+    const blocks=fromText(body.value);
+    const al=$('#f-al').value.split(',').map(s=>s.trim()).filter(Boolean);
+    const sameGrp=ALL.find(x=>x.grp===grp);
+    const col = e&&e.grp===grp ? e.col : (sameGrp?sameGrp.col:(CATCOL[c]||'autre'));
+    const id = e?e.id:(slug(t)||'fiche')+'-'+Math.random().toString(36).slice(2,7);
+    const doc={id,t,cat:c,grp,sub:e?(e.grp===grp?e.sub||'':''):'',col,al,blocks,updatedAt:Date.now()};
+    $('#f-msg').className='msg';$('#f-msg').textContent='Enregistrement…';
+    const ok=await save(id,doc);
+    if(ok){ closeLayer(); toast(e?'Fiche enregistrée':'Fiche créée'); go({name:'fiche',id}) }
+    else { $('#f-msg').className='msg err'; $('#f-msg').textContent=lastErr }
+  });
+}
+function openNote(id){
+  const e=BYID.get(id);
+  $('#layer').innerHTML=`<div class="ov"><form class="dlg" id="ntf" style="width:min(640px,100%)">
+    <header><h2>Ajouter une note · ${esc(e.t)}</h2><button type="button" class="btn ghost" data-close>Fermer</button></header>
+    <div class="content" style="grid-template-columns:minmax(0,1fr)"><div class="form"><label>Note (une idée par ligne)<textarea id="n-body" style="min-height:220px;font-family:var(--font)" placeholder="Lecture, retour de cliente, précision, lecture…"></textarea></label></div></div>
+    <footer><span class="msg" id="n-msg"></span><button type="button" class="btn" data-close>Annuler</button><button class="btn primary">Ajouter à la fiche</button></footer></form></div>`;
+  $('#n-body').focus();
+  $('#ntf').addEventListener('submit',async ev=>{
+    ev.preventDefault(); const lines=$('#n-body').value.split('\n').map(s=>s.replace(/^[-•]\s*/,'').trim()).filter(Boolean);
+    if(!lines.length){$('#n-msg').textContent='Écrivez au moins une ligne.';return}
+    const d=new Date().toLocaleDateString('fr-FR');
+    const doc={...stripFlags(e),blocks:[...(e.blocks||[]),['sec','Mes notes · '+d,'perso',lines]],updatedAt:Date.now()};
+    const ok=await save(id,doc); if(ok){closeLayer();toast('Note ajoutée');render()} else {$('#n-msg').className='msg err';$('#n-msg').textContent=lastErr}
+  });
+}
+function pack(doc){const o={...doc};delete o.edited;delete o.mine;o.b=JSON.stringify(doc.blocks||[]);delete o.blocks;return JSON.parse(JSON.stringify(o))}
+function unpack(o){const d={...o};if(typeof d.b==='string'){try{d.blocks=JSON.parse(d.b)}catch(e){d.blocks=[]}}delete d.b;return d}
+function stripFlags(e){const o={...e};delete o.edited;delete o.mine;return o}
+function closeLayer(){$('#layer').innerHTML=''}
+
+/* ---------------- stockage (db) ---------------- */
+let lastErr='';
+function errMsg(e){const c=e&&e.code;return c==='quota_exceeded'?'Espace de stockage plein : supprimez des fiches inutiles pour en ajouter.':c==='invalid_argument'?'Enregistrement refusé : la modification est réservée à l\'éditrice du référentiel.':'Enregistrement impossible pour le moment. Réessayez dans un instant.'}
+async function save(id,doc){
+  if(!db){lastErr='Modification indisponible ici : ouvrez le référentiel dans Claude.';return false}
+  const body=pack(doc);
+  try{ await db.collection('fiches').doc(id).set(body); OVR.set(id,doc); merge(); return true }
+  catch(e){ if(e&&e.code==='unavailable'){ try{await new Promise(r=>setTimeout(r,600+Math.random()*600));await db.collection('fiches').doc(id).set(body);OVR.set(id,doc);merge();return true}catch(e2){lastErr=errMsg(e2);return false} } lastErr=errMsg(e); return false }
+}
+async function remove(id){
+  try{ await db.collection('fiches').doc(id).delete(); OVR.delete(id); merge(); return true }catch(e){ lastErr=errMsg(e); return false }
+}
+
+/* ---------------- événements ---------------- */
+const qEl=$('#q'); let qt=null;
+function runSearch(){const q=qEl.value.trim();$('#clr').hidden=!q;$('#kbd').hidden=!!q;if(!q){if(view.name==='search')go({name:'home'});return}const changed=q!==lastQuery||view.name!=='search';lastQuery=q;if(view.name!=='search'){HIST.push({...view,sc:window.scrollY});if(HIST.length>60)HIST.shift()}view={name:'search',q,filter:view.name==='search'&&!changed?view.filter:'all'};render();if(changed)window.scrollTo({top:0})}
+qEl.addEventListener('input',()=>{clearTimeout(qt);qt=setTimeout(runSearch,140)});
+qEl.addEventListener('keydown',ev=>{if(ev.key==='Enter'){clearTimeout(qt);runSearch();const f=document.querySelector('#view .row');if(f&&ev.metaKey)f.click()} if(ev.key==='Escape'){qEl.value='';runSearch();qEl.blur()}});
+$('#clr').addEventListener('click',()=>{qEl.value='';runSearch();qEl.focus()});
+document.addEventListener('keydown',ev=>{ if((ev.metaKey||ev.ctrlKey)&&ev.key.toLowerCase()==='k'){ev.preventDefault();qEl.focus();qEl.select()} else if(ev.key==='/'&&document.activeElement.tagName!=='INPUT'&&document.activeElement.tagName!=='TEXTAREA'){ev.preventDefault();qEl.focus()} else if(ev.key==='Escape'&&$('#layer').innerHTML){closeLayer()} });
+$('#home').addEventListener('click',()=>{qEl.value='';$('#clr').hidden=true;$('#kbd').hidden=false;go({name:'home'})});
+$('#newBtn').addEventListener('click',()=>openEditor({}));
+$('#backBtn').addEventListener('click',goBack);
+
+document.addEventListener('click',async ev=>{
+  const t=ev.target.closest('button,[data-close],[data-open]'); if(!t) { if(ev.target.id==='ov') closeLayer(); return }
+  const d=t.dataset;
+  if('close' in d){closeLayer();return}
+  if(d.open){ go({name:'fiche',id:d.open,hl:view.name==='search'?view.q:null}); return }
+  if(d.grp){ go({name:'group',grp:d.grp}); return }
+  if(d.cat&&!('newCat' in d)){ go({name:'cat',cat:d.cat}); return }
+  if('home' in d){ qEl.value='';$('#clr').hidden=true;$('#kbd').hidden=false; go({name:'home'}); return }
+  if('mine' in d){ go({name:'mine'}); return }
+  if(d.try){ qEl.value=d.try; runSearch(); return }
+  if(d.filter){ view.filter=d.filter; render(); return }
+  if(d.rf!==undefined){ const [k,v]=d.rf.split('|'); const f=view.rf; if(k==='r'||k==='a'){ f[k]=f[k].includes(v)?f[k].filter(x=>x!==v):f[k].concat(v) } else f[k]=(f[k]===v?'':v); const y=window.scrollY; render(); window.scrollTo({top:y}); return }
+  if('rfReset' in d){ view.rf=null; render(); return }
+  if(d.toc){ const s=document.getElementById(d.toc); if(s) s.scrollIntoView({behavior:'smooth',block:'start'}); return }
+  if(d.edit){ openEditor({id:d.edit}); return }
+  if(d.note){ openNote(d.note); return }
+  if('newCat' in d||d.newGrp||d.newTitle!==undefined){ openEditor({cat:d.newCat||'autre',grp:d.newGrp||'',title:d.newTitle||''}); return }
+  if(d.restore){ $('#confirm').innerHTML=`<div class="confirm">Revenir à la version d'origine ? Les modifications et notes ajoutées à cette fiche seront effacées. <button class="btn danger" data-restore-ok="${esc(d.restore)}">Oui, revenir</button><button class="btn" data-cancel>Annuler</button></div>`; return }
+  if(d.restoreOk){ if(await remove(d.restoreOk)){toast("Version d'origine rétablie");render()} else toast(lastErr); return }
+  if(d.del){ $('#confirm').innerHTML=`<div class="confirm">Supprimer définitivement cette fiche ? <button class="btn danger" data-del-ok="${esc(d.del)}">Supprimer</button><button class="btn" data-cancel>Annuler</button></div>`; return }
+  if(d.delOk){ if(await remove(d.delOk)){toast('Fiche supprimée');go({name:'home'})} else toast(lastErr); return }
+  if('cancel' in d){ $('#confirm').innerHTML=''; return }
+});
+function fromHash(){
+  const h=decodeURIComponent(location.hash.slice(1));
+  if(!h) return {name:'home'};
+  if(h==='mes-ajouts') return {name:'mine'};
+  if(h.startsWith('conseils-')) return {name:'conseils',id:h.slice(9)};
+  if(h.startsWith('c-')) return {name:'cat',cat:h.slice(2)};
+  if(h.startsWith('g-')){const g=[...groups().keys()].find(n=>slug(n)===h.slice(2));return g?{name:'group',grp:g}:{name:'home'}}
+  return BYID.has(h)?{name:'fiche',id:h}:{name:'home'};
+}
+window.addEventListener('popstate',()=>{HIST.pop();view=fromHash();render(true)});
+window.addEventListener('hashchange',()=>{const v=fromHash();if(v.name!==view.name||v.id!==view.id||v.grp!==view.grp){view=v;render(true)}});
+
+/* ---------------- démarrage ---------------- */
+async function start(){
+  try{
+    const r=await fetch('data.json'); const d=await r.json();
+    BASE=new Map(d.entries.map(e=>[e.id,e])); MAPS=d.maps||{};
+  }catch(e){ $('#view').innerHTML='<div class="empty">Les fiches n’ont pas pu être chargées. Rechargez la page.</div>'; return }
+  merge(); view=fromHash(); render();
+  const c=window.claude; if(!c||!c.use) return;
+  try{
+    const [d,u]=await Promise.all([c.use('db'),c.use('user')]);
+    db=d; dbReady=!!d;
+    if(u){ try{ const [o,ce]=await Promise.all([u.isOwner(),u.canEdit()]); canWrite = !!d && (o===true || ce===true) }catch(e){ canWrite=!!d } } else canWrite=!!d;
+    $('#newBtn').hidden=!canWrite;
+    if(d){
+      d.collection('fiches').onSnapshot(snap=>{
+        OVR=new Map(snap.docs.filter(x=>x.exists).map(x=>[x.id,unpack(x.data())]));
+        merge(); if(!$('#layer').innerHTML) render(false); else renderSide();
+      },()=>{});
+    }
+    render();
+  }catch(e){}
+}
+start();
+})();
+</script>
+
+</html>
