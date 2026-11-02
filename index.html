@@ -349,7 +349,7 @@ function toast(t){const el=document.createElement('div');el.className='toast';el
 let BASE = new Map();      // fiches d'origine
 let OVR = new Map();       // modifications et ajouts (db)
 let ALL = [];              // fiches fusionnées
-let BYID = new Map(); let MAPS = {};
+let BYID = new Map(); let MAPS = {}; let IMGS = {};
 let IDX = [];              // index de recherche
 let db = null, canWrite = false, dbReady = false;
 let view = {name:'home'}; let lastQuery = '';
@@ -542,9 +542,12 @@ function vGroup(grp){
   if(!es.length) return `<div class="empty">Aucune fiche dans ce groupe.</div>`;
   const top=es.find(e=>e.top); const col=(top||es[0]).col;
   const subs=new Map(); for(const e of es){ if(e.top) continue; const k=e.sub&&!/Vue d'ensemble/.test(e.sub)?(e.cat==='pathologie'?'Pathologies'+(e.sub&&e.sub!==grp?' · '+e.sub:''):e.sub):catLabel(e.cat); if(!subs.has(k))subs.set(k,[]); subs.get(k).push(e) }
+  const RANK=k=>k==='Récap'?0:k==='Généralités'?1:k==='Organes'?2:k.startsWith('Pathologies')?3:k==='Plantes'?5:4;
+  const subsArr=[...subs.entries()].map((x,i)=>[x,i]).sort((a,b)=>(RANK(a[0][0])-RANK(b[0][0]))||(a[1]-b[1])).map(x=>x[0]);
+  const SUBLAB={'Récap':'Récaps','Plantes':'Plantes et remèdes adaptés'};
   return `<div class="fhead tint" style="${tint(col)}"><div class="crumbs">${esc(catLabel(es[0].cat))}</div><h1>${esc(top?top.t:grp)}</h1>
     <div class="tools">${top?`<button class="btn" data-open="${esc(top.id)}">Ouvrir la vue d'ensemble</button>`:''}${canWrite?`<button class="btn" data-new-grp="${esc(grp)}" data-new-cat="${esc(es[0].cat)}">Ajouter une fiche ici</button>`:''}</div></div>
-    ${[...subs.entries()].map(([k,l])=>`<h2 class="blk">${esc(k)}</h2><div class="list">${l.sort((a,b)=>a.t.localeCompare(b.t,'fr')).map(e=>rowHtml({e})).join('')}</div>`).join('')}`;
+    ${subsArr.map(([k,l])=>`<h2 class="blk">${esc(SUBLAB[k]||k)}</h2><div class="list">${l.sort((a,b)=>a.t.localeCompare(b.t,'fr')).map(e=>rowHtml({e})).join('')}</div>`).join('')}`;
 }
 function vCat(cat){
   const es=ALL.filter(e=>e.cat===cat).sort((a,b)=>a.t.localeCompare(b.t,'fr'));
@@ -662,7 +665,7 @@ function blocksHtml(blocks,toks){
     else if(k==='sec'){const kd=b[2]||'normal';out+=`<section class="sec k-${kd}" id="s${n++}"><h3>${KINDLAB[kd]?`<span class="ic">${KINDLAB[kd]}</span>`:''}${H(b[1])}</h3>${b[3].length>1?`<ul>${b[3].map(t=>`<li>${H(t)}</li>`).join('')}</ul>`:`<p>${H(b[3][0]||'')}</p>`}</section>`}
     else if(k==='tb'){out+=`<div class="tbl"><table>${b[2]?`<thead><tr>${b[2].map(c=>`<th>${esc(c)}</th>`).join('')}</tr></thead>`:''}<tbody>${b[1].map(r=>`<tr>${r.map(c=>`<td>${H(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`}
     else if(k==='map'){out+=MAPS[b[1]]?`<figure class="fig map">${MAPS[b[1]]}<figcaption>Touchez un organe pour ouvrir sa fiche</figcaption></figure>`:''}
-    else if(k==='img'){out+=`<figure class="fig"><img loading="lazy" src="img/${esc(String(b[1]).replace(/\.png$/,'.webp'))}" alt="Schéma"></figure>`}
+    else if(k==='img'){out+=`<figure class="fig"><img src="${(()=>{const n=String(b[1]).replace(/\.png$/,'.webp');return IMGS[n]||('img/'+esc(n))})()}" alt="Schéma"></figure>`}
     else if(k==='links'){const ls=b[1].map(id=>BYID.get(id)).filter(Boolean);out+=`<div class="links">${ls.map(e=>`<button class="chip tint" style="${tint(e.col)}" data-open="${esc(e.id)}">${esc(e.t)}</button>`).join('')}</div>`}
   }
   return out;
@@ -897,7 +900,7 @@ window.addEventListener('hashchange',()=>{const v=fromHash();if(v.name!==view.na
 async function start(){
   try{
     const r=await fetch('data.json'); const d=await r.json();
-    BASE=new Map(d.entries.map(e=>[e.id,e])); MAPS=d.maps||{};
+    BASE=new Map(d.entries.map(e=>[e.id,e])); MAPS=d.maps||{}; IMGS=d.imgs||{};
   }catch(e){ $('#view').innerHTML='<div class="empty">Les fiches n’ont pas pu être chargées. Rechargez la page.</div>'; return }
   merge(); view=fromHash(); render();
   const c=window.claude; if(!c||!c.use) return;
