@@ -175,6 +175,88 @@ ol.steps li::before{content:counter(st);position:absolute;left:0;top:-1px;width:
 .cs-foot{font-size:11.5px;color:#666;margin-top:18px;line-height:1.5}
 @media (max-width:600px){.cons{padding:20px 16px;margin:10px 0}}
 @media print{#main,#view,main{padding:0!important;margin:0!important;min-height:0!important}.noprint{display:none!important}body{background:#fff}.cons{box-shadow:none;margin:0;padding:0;max-width:none}.shell{padding:0}@page{margin:14mm}.cs{-webkit-print-color-adjust:exact;print-color-adjust:exact}.cs-head{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+.c-wrap{display:grid;gap:18px}
+.c-head{display:flex;flex-wrap:wrap;gap:14px 20px;justify-content:space-between;align-items:flex-start;padding:24px 26px;border-radius:20px;background:var(--surface);box-shadow:var(--shadow)}
+.c-k{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.c-head h1{margin:2px 0 6px;font-size:clamp(21px,2.6vw,27px);font-weight:600;line-height:1.2}
+.c-priv{display:flex;gap:7px;align-items:center;margin:0;font-size:13px;color:var(--muted)}
+.c-priv svg{flex:none;color:var(--accent)}
+.c-tools{display:flex;flex-wrap:wrap;gap:8px}
+.c-nav{display:grid;gap:10px}
+.c-navg{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.c-navg>span{font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);min-width:130px}
+.c-navg button{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.c-navg button:hover{border-color:var(--accent)}
+.c-navg button[aria-current="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.c-navg button i{font-style:normal;font-size:11px;font-weight:600;background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:0 6px;min-width:18px;text-align:center}
+.c-navg button[aria-current="true"] i{background:rgba(255,255,255,.25);color:inherit}
+.c-step{display:grid;gap:14px}
+.c-step>h2{margin:6px 0 0;font-size:20px;font-weight:600}
+.c-sec{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px;display:grid;gap:12px;min-width:0}
+.c-sec h3{margin:0;font-size:15.5px;font-weight:600;color:var(--accent)}
+.c-sh{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.c-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 18px}
+.c-f{display:grid;gap:6px;align-content:start;min-width:0}
+.c-f.full{grid-column:1/-1}
+.c-l{font-size:13px;font-weight:500;color:var(--ink)}
+.c-f input,.c-f textarea,.c-add input{width:100%;font:inherit;font-size:15px;color:var(--ink);background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:9px 11px;min-width:0}
+.c-f textarea{resize:vertical;line-height:1.5;min-height:74px}
+.c-f input:focus,.c-f textarea:focus,.c-add input:focus{outline:2px solid var(--focus);outline-offset:1px;border-color:transparent}
+.c-n{display:flex;gap:8px;align-items:center}.c-n input{max-width:140px}.c-n span{color:var(--muted);font-size:13px}
+.c-ch{display:flex;flex-wrap:wrap;gap:6px}
+.c-ch button{border:1px solid var(--line);background:var(--surface-2);color:var(--ink);border-radius:999px;padding:6px 12px;font-size:13.5px;cursor:pointer;display:inline-flex;gap:6px;align-items:center;text-align:left}
+.c-ch button:hover{border-color:var(--accent)}
+.c-ch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.c-ch button i{font-style:normal;font-size:10.5px;font-weight:700;opacity:.55}
+.c-s{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:12px;color:var(--muted)}
+.c-sb{display:flex;gap:3px;flex-wrap:wrap}
+.c-sb button{width:32px;height:32px;border-radius:9px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);font-size:13px;cursor:pointer;font-variant-numeric:tabular-nums}
+.c-sb button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.c-info{font-size:13.5px;line-height:1.55;color:var(--muted);background:var(--surface-2);border-radius:10px;padding:10px 13px}
+.c-info.priv{color:var(--accent);background:var(--accent-soft)}
+.c-info.warn{background:var(--k-upd-bg,#FFF7DD);color:var(--k-upd-ink,#6B5514);border-left:3px solid var(--k-upd-line,#E4C65A)}
+.c-info.alert{background:var(--k-alert-bg,#FCEEF1);color:var(--k-alert-ink,#9E3D55);border-left:3px solid var(--k-alert-line,#E7A9B8)}
+.c-info.alert ul{margin:6px 0 0;padding-left:18px}
+.c-calc{font-size:13.5px;font-weight:500;color:var(--accent)}
+.c-tally{font-size:14px;line-height:1.5;background:var(--accent-soft);color:var(--ink);border-radius:14px;padding:12px 16px}
+.c-tally b{color:var(--accent);font-size:16px}.c-tally i{display:block;font-size:12.5px;color:var(--muted)}
+.c-link:empty{display:none}
+.btn.sm{padding:5px 11px;font-size:12.5px}
+.c-q{margin:0;padding-left:20px;line-height:1.55;font-size:14px;display:grid;gap:3px}
+.c-muted{margin:0;color:var(--muted);font-size:13px}
+.c-add{display:flex;gap:8px}.c-add input{flex:1}
+.c-acts{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.c-kv{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.c-kv>div{background:var(--surface-2);border-radius:12px;padding:10px 12px;display:grid;gap:4px;justify-items:start}
+.c-kv span{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}.c-kv b{font-weight:600;font-size:14.5px}
+.c-pn{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.cat.c-tile{grid-column:1/-1;min-height:0;background:var(--accent-soft);color:var(--ink);display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:center;padding:18px 20px}
+.cat.c-tile svg{grid-row:span 2;width:34px;height:34px;color:var(--accent)}
+.cat.c-tile b{font-size:16px}.cat.c-tile span{color:var(--muted);opacity:1}
+#cprint{display:none}
+@media (max-width:640px){.c-grid{grid-template-columns:minmax(0,1fr)}.c-head{padding:18px}.c-sec{padding:14px}.c-navg{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-16px;padding-inline:16px}.c-navg>span{min-width:auto;white-space:nowrap;margin-right:4px}.c-navg button{white-space:nowrap;flex:none}.c-head{margin-top:10px}.c-tools .btn{flex:1 1 auto;justify-content:center}}
+@media print{
+ body.cprint>*:not(#cprint){display:none!important}
+ body.cprint #cprint{display:block!important;color:#222;font-size:10.5pt;line-height:1.45}
+ #cprint .r-head{background:#EAF3EC;border-radius:10px;padding:12px 16px;margin-bottom:12px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ #cprint .r-k{font-size:9pt;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#2F6B4E}
+ #cprint h1{font-size:18pt;margin:2px 0 6px;color:#24543D}
+ #cprint .r-meta{display:flex;gap:20px;flex-wrap:wrap;font-size:9.5pt;color:#555}
+ #cprint .r-step{margin-top:12px}
+ #cprint h2{font-size:13pt;color:#2F6B4E;border-bottom:1.5px solid #CFE3D5;padding-bottom:3px;margin:12px 0 6px;break-after:avoid}
+ #cprint h3{font-size:10.5pt;margin:8px 0 3px;color:#3F5F4C;break-after:avoid}
+ #cprint .r-sec{break-inside:avoid}
+ #cprint table{width:100%;border-collapse:collapse}
+ #cprint th{text-align:left;font-weight:500;width:38%;padding:3px 8px 3px 0;vertical-align:top;color:#555;border-bottom:1px solid #EEE}
+ #cprint td{padding:3px 0;vertical-align:top;border-bottom:1px solid #EEE}
+ #cprint p{margin:2px 0;white-space:pre-wrap}
+ #cprint ul{margin:2px 0;padding-left:16px}
+ #cprint .r-ln{display:block;border-bottom:1px dotted #AAA;height:18px}
+ #cprint .r-opts{font-size:9pt;color:#444}
+ #cprint .r-mut{color:#777;font-size:9pt}
+ #cprint .r-foot{margin-top:16px;font-size:8.5pt;color:#666;border-top:1px solid #DDD;padding-top:6px}
+}
+
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 18px}
 .filters button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 13px;font-size:13px;cursor:pointer}
 .filters button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
@@ -306,7 +388,7 @@ const PAL = {
   'th-bach':['#F1E6F4','#7A4C86'], 'th-elixirs':['#FBE9EF','#9E4F6B'], 'th-aroma':['#E6F2EC','#2F6B4E'], 'th-gemmo':['#EAF2DE','#4F6E33'],
   'th-sommeil':['#E5E9F7','#3F4E8C'], 'th-mental':['#ECEBF7','#57528C'], 'th-hydro':['#E1EEF4','#36667E'], 'th-exercice':['#FBE2DF','#A2463F'],
   'th-gymorg':['#E0F1F0','#2E6F6B'], 'th-dietet':['#F6EFD8','#7E6620'], 'th-nutri':['#FCEEDD','#97602A'], 'th-cuisine':['#FBE6DC','#A0563A'],
-  'th-phyto':['#E3EFE1','#3E6B3A'], 'th-phytoapp':['#E8EEDD','#5A6B2E'], 'th-micro':['#FDEBD8','#A2582A'], 'th-myco':['#EEE6DD','#6B4F3A'], 'th-reflexo':['#FCE4E0','#A24D45'], 'th-manuel':['#F6E7DA','#8C5A33'], 'th-psycho':['#EFE4F3','#6E4A80'], 'th-pnei':['#E4EAF6','#3E5A8A'], 'th-respi':['#E0F0F5','#2F6A7C'], 'th-elim':['#E5F1E8','#3D6E4B'], 'th-posturo':['#EDEDE0','#5F6234'], 'th-antiinflam':['#FBE8DA','#A4552E'], recette:['#FCEFD9','#93641C'], contact:['#E6EEF5','#3B5F7E']
+  'th-phyto':['#E3EFE1','#3E6B3A'], 'th-phytoapp':['#E8EEDD','#5A6B2E'], 'th-micro':['#FDEBD8','#A2582A'], 'th-myco':['#EEE6DD','#6B4F3A'], 'th-reflexo':['#FCE4E0','#A24D45'], 'th-manuel':['#F6E7DA','#8C5A33'], 'th-psycho':['#EFE4F3','#6E4A80'], 'th-pnei':['#E4EAF6','#3E5A8A'], 'th-respi':['#E0F0F5','#2F6A7C'], 'th-elim':['#E5F1E8','#3D6E4B'], 'th-posturo':['#EDEDE0','#5F6234'], 'th-antiinflam':['#FBE8DA','#A4552E'], 'th-morpho':['#F3E6DE','#8A5440'], 'th-irido':['#E2ECF3','#3C5F7A'], recette:['#FCEFD9','#93641C'], contact:['#E6EEF5','#3B5F7E']
 };
 function hexToHsl(h){h=h.replace('#','');const r=parseInt(h.slice(0,2),16)/255,g=parseInt(h.slice(2,4),16)/255,b=parseInt(h.slice(4,6),16)/255;const mx=Math.max(r,g,b),mn=Math.min(r,g,b);let H=0,S=0;const L=(mx+mn)/2;if(mx!==mn){const d=mx-mn;S=L>.5?d/(2-mx-mn):d/(mx+mn);H=mx===r?(g-b)/d+(g<b?6:0):mx===g?(b-r)/d+2:(r-g)/d+4;H*=60}return [H,S*100,L*100]}
 function tint(col){const p=PAL[col]||PAL.autre;const [h,s]=hexToHsl(p[1]);return `--cb-l:${p[0]};--cf-l:${p[1]};--cb-d:hsl(${h} ${Math.min(s,40)}% 21%);--cf-d:hsl(${h} ${Math.min(s+10,60)}% 80%)`}
@@ -325,7 +407,7 @@ const CATS = [
   {k:'autre',label:'Autres fiches',one:'Autre'}
 ];
 const CATCOL = {contact:'contact',recette:'recette',plante:'plante',bach:'bach',routine:'routine',autre:'autre',outil:'outil'};
-const TOOLS = ['Fleurs de Bach','Élixirs floraux','Phytologie','Phytologie appliquée','Aromatologie','Gemmothérapie','Mycothérapie','Bio-nutrition','Micronutrition','Bio-diététique','Alimentation anti-inflammatoire','Cuisine saine','Sommeil','Gestion du stress','Psychologie','PNEI','Respiration et revitalisation','Exercice physique','Gymnastique des organes','Posturologie','Hydrologie',"Techniques d'élimination",'Réflexologie','Techniques manuelles'];
+const TOOLS = ['Fleurs de Bach','Élixirs floraux','Phytologie','Phytologie appliquée','Aromatologie','Gemmothérapie','Mycothérapie','Bio-nutrition','Micronutrition','Bio-diététique','Alimentation anti-inflammatoire','Cuisine saine','Sommeil','Gestion du stress','Psychologie','PNEI','Respiration et revitalisation','Exercice physique','Gymnastique des organes','Posturologie','Hydrologie',"Techniques d'élimination",'Réflexologie','Techniques manuelles','Morphologie','Iridologie'];
 const catLabel = k => (CATS.find(c=>c.k===k)||{label:k}).label;
 const catOne = k => (CATS.find(c=>c.k===k)||{one:k}).one;
 
@@ -461,14 +543,14 @@ function renderSide(){
   const cnt=k=>ALL.filter(e=>e.cat===k).length;
   const it=(x)=>`<button class="it tint" style="${tint(x.col)}" data-grp="${esc(x.name)}" aria-current="${cur===x.name}"><span class="dot"></span>${esc(cap(x.name.replace('Système ','')))}<span class="n">${x.n}</span></button>`;
   const catIt=(k)=>`<button class="it tint" style="${tint(CATCOL[k]||'autre')}" data-cat="${k}" aria-current="${view.name==='cat'&&view.cat===k}"><span class="dot"></span>${esc(catLabel(k))}<span class="n">${cnt(k)}</span></button>`;
-  const html = `<button class="it" data-home aria-current="${view.name==='home'}">Accueil</button>
+  const html = `<button class="it" data-home aria-current="${view.name==='home'}">Accueil</button><button class="it" data-consult aria-current="${view.name==='consult'}">Outil Naturo · Consultation</button>
     <h3>Systèmes</h3>${sys.map(it).join('')}
     <h3>Populations cibles</h3>${pops.map(it).join('')}
     <h3>Outils et techniques</h3>${tools.map(it).join('')}
     <h3>Ressources</h3>${['recette','contact','plante','bach','routine','autre'].map(catIt).join('')}
     ${ALL.some(e=>e.mine||e.edited)?`<h3>Mes contributions</h3><button class="it" data-mine aria-current="${view.name==='mine'}">Ajouts et modifications<span class="n">${ALL.filter(e=>e.mine||e.edited).length}</span></button>`:''}`;
   $('#side').innerHTML = html;
-  $('#mnav').innerHTML = `<button data-home>Accueil</button>${sys.concat(pops,tools).map(x=>`<button data-grp="${esc(x.name)}">${esc(cap(x.name.replace('Système ','')))}</button>`).join('')}${['recette','contact','plante','bach','routine'].map(k=>`<button data-cat="${k}">${esc(catLabel(k))}</button>`).join('')}`;
+  $('#mnav').innerHTML = `<button data-home>Accueil</button><button data-consult>Consultation</button>${sys.concat(pops,tools).map(x=>`<button data-grp="${esc(x.name)}">${esc(cap(x.name.replace('Système ','')))}</button>`).join('')}${['recette','contact','plante','bach','routine'].map(k=>`<button data-cat="${k}">${esc(catLabel(k))}</button>`).join('')}`;
 }
 
 /* ---------------- vues ---------------- */
@@ -478,7 +560,7 @@ function go(v,push=true){
   if(push&&view&&!sameView(view,v)){ if(view.name==='search'&&HIST.length&&HIST[HIST.length-1].name==='search') HIST.pop(); HIST.push({...view,sc:window.scrollY,rf:view.rf?JSON.parse(JSON.stringify(view.rf)):undefined}); if(HIST.length>60) HIST.shift() }
   view=v;
   if (push){
-    const h = v.name==='conseils'?'conseils-'+v.id : v.name==='fiche'?v.id : v.name==='group'?'g-'+slug(v.grp) : v.name==='cat'?'c-'+v.cat : v.name==='mine'?'mes-ajouts' : '';
+    const h = v.name==='consult'?'consultation' : v.name==='conseils'?'conseils-'+v.id : v.name==='fiche'?v.id : v.name==='group'?'g-'+slug(v.grp) : v.name==='cat'?'c-'+v.cat : v.name==='mine'?'mes-ajouts' : '';
     if (v.name!=='search'){ try{ if(('#'+h)!==location.hash){ history.pushState(null,'',h?'#'+h:location.pathname+location.search) } }catch(e){ location.hash=h } }
   }
   render(true);
@@ -486,7 +568,7 @@ function go(v,push=true){
 function goBack(){
   const v=HIST.pop(); if(!v){ go({name:'home'},false); return }
   view=v; qEl.value=v.name==='search'?(v.q||''):''; lastQuery=qEl.value.trim(); $('#clr').hidden=!qEl.value; $('#kbd').hidden=!!qEl.value;
-  const h = v.name==='conseils'?'conseils-'+v.id : v.name==='fiche'?v.id : v.name==='group'?'g-'+slug(v.grp) : v.name==='cat'?'c-'+v.cat : v.name==='mine'?'mes-ajouts' : '';
+  const h = v.name==='consult'?'consultation' : v.name==='conseils'?'conseils-'+v.id : v.name==='fiche'?v.id : v.name==='group'?'g-'+slug(v.grp) : v.name==='cat'?'c-'+v.cat : v.name==='mine'?'mes-ajouts' : '';
   if(v.name!=='search'){ try{ history.replaceState(null,'',h?'#'+h:location.pathname+location.search) }catch(e){} }
   render(true); if(v.sc) window.scrollTo({top:v.sc});
 }
@@ -500,6 +582,7 @@ function render(scroll){
   else if (view.name==='cat') el.innerHTML=vCat(view.cat);
   else if (view.name==='mine') el.innerHTML=vMine();
   else if (view.name==='conseils') el.innerHTML=vConseils(view.id);
+  else if (view.name==='consult') el.innerHTML=vConsult();
   else el.innerHTML=vHome();
   document.body.classList.toggle('pmode',view.name==='conseils');
   if (scroll && view.name!=='search') window.scrollTo({top:0});
@@ -517,7 +600,7 @@ function vHome(){
     ${canWrite?'':`<p class="ro">${dbReady?'Consultation seule : la modification des fiches est réservée à l\'éditrice du référentiel.':'Consultation seule pour l\'instant : la modification est disponible quand le référentiel est ouvert dans Claude avec le compte de l\'éditrice.'}</p>`}
   </div>
   <h2 class="blk">Parcourir</h2>
-  <div class="grid-cats">${tiles.map(x=>`<button class="cat tint" style="${tint(x.col)}" data-grp="${esc(x.name)}"><b>${esc(x.top.t)}</b><span>${x.n} fiches</span></button>`).join('')}
+  <div class="grid-cats"><button class="cat c-tile" data-consult><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v2h6V3M8.5 10h7M8.5 14h7M8.5 18h4"/></svg><b>Outil Naturo · Consultation</b><span>Anamnèse, bilan morphologique et iridologique, synthèse : à remplir pendant le rendez-vous et à exporter en PDF, sans rien enregistrer.</span></button>${tiles.map(x=>`<button class="cat tint" style="${tint(x.col)}" data-grp="${esc(x.name)}"><b>${esc(x.top.t)}</b><span>${x.n} fiches</span></button>`).join('')}
     ${['recette','contact','plante','bach','routine'].map(k=>{const n=ALL.filter(e=>e.cat===k).length;return `<button class="cat tint" style="${tint(CATCOL[k])}" data-cat="${k}"><b>${esc(catLabel(k))}</b><span>${n?n+' fiches':'À compléter'}</span></button>`}).join('')}
   </div>
   ${recent.length?`<h2 class="blk">Consultées récemment</h2><div class="list">${recent.map(e=>rowHtml({e})).join('')}</div>`:''}`;
@@ -665,7 +748,7 @@ function blocksHtml(blocks,toks){
     else if(k==='sec'){const kd=b[2]||'normal';out+=`<section class="sec k-${kd}" id="s${n++}"><h3>${KINDLAB[kd]?`<span class="ic">${KINDLAB[kd]}</span>`:''}${H(b[1])}</h3>${b[3].length>1?`<ul>${b[3].map(t=>`<li>${H(t)}</li>`).join('')}</ul>`:`<p>${H(b[3][0]||'')}</p>`}</section>`}
     else if(k==='tb'){out+=`<div class="tbl"><table>${b[2]?`<thead><tr>${b[2].map(c=>`<th>${esc(c)}</th>`).join('')}</tr></thead>`:''}<tbody>${b[1].map(r=>`<tr>${r.map(c=>`<td>${H(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`}
     else if(k==='map'){out+=MAPS[b[1]]?`<figure class="fig map">${MAPS[b[1]]}<figcaption>Touchez un organe pour ouvrir sa fiche</figcaption></figure>`:''}
-    else if(k==='img'){out+=`<figure class="fig"><img src="${(()=>{const n=String(b[1]).replace(/\.png$/,'.webp');return IMGS[n]||('img/'+esc(n))})()}" alt="Schéma"></figure>`}
+    else if(k==='img'){out+=`<figure class="fig"><img onerror="this.replaceWith(Object.assign(document.createElement('p'),{className:'note',textContent:'Image non chargée sur cet appareil.'}))" src="${(()=>{const n=String(b[1]).replace(/\.png$/,'.webp');return IMGS[n]||('img/'+esc(n))})()}" alt="Schéma"></figure>`}
     else if(k==='links'){const ls=b[1].map(id=>BYID.get(id)).filter(Boolean);out+=`<div class="links">${ls.map(e=>`<button class="chip tint" style="${tint(e.col)}" data-open="${esc(e.id)}">${esc(e.t)}</button>`).join('')}</div>`}
   }
   return out;
@@ -870,6 +953,7 @@ document.addEventListener('click',async ev=>{
   if(d.cat&&!('newCat' in d)){ go({name:'cat',cat:d.cat}); return }
   if('home' in d){ qEl.value='';$('#clr').hidden=true;$('#kbd').hidden=false; go({name:'home'}); return }
   if('mine' in d){ go({name:'mine'}); return }
+  if('consult' in d){ go({name:'consult'}); return }
   if(d.try){ qEl.value=d.try; runSearch(); return }
   if(d.filter){ view.filter=d.filter; render(); return }
   if(d.rf!==undefined){ const [k,v]=d.rf.split('|'); const f=view.rf; if(k==='r'||k==='a'){ f[k]=f[k].includes(v)?f[k].filter(x=>x!==v):f[k].concat(v) } else f[k]=(f[k]===v?'':v); const y=window.scrollY; render(); window.scrollTo({top:y}); return }
@@ -888,6 +972,7 @@ function fromHash(){
   const h=decodeURIComponent(location.hash.slice(1));
   if(!h) return {name:'home'};
   if(h==='mes-ajouts') return {name:'mine'};
+  if(h==='consultation') return {name:'consult'};
   if(h.startsWith('conseils-')) return {name:'conseils',id:h.slice(9)};
   if(h.startsWith('c-')) return {name:'cat',cat:h.slice(2)};
   if(h.startsWith('g-')){const g=[...groups().keys()].find(n=>slug(n)===h.slice(2));return g?{name:'group',grp:g}:{name:'home'}}
@@ -899,8 +984,8 @@ window.addEventListener('hashchange',()=>{const v=fromHash();if(v.name!==view.na
 /* ---------------- démarrage ---------------- */
 async function start(){
   try{
-    const r=await fetch('data.json'); const d=await r.json();
-    BASE=new Map(d.entries.map(e=>[e.id,e])); MAPS=d.maps||{}; IMGS=d.imgs||{};
+    const r=await fetch('data.json?v=1793626162',{cache:'no-store'}); const d=await r.json();
+    BASE=new Map(d.entries.map(e=>[e.id,e])); MAPS=d.maps||{}; IMGS=d.imgs||{}; CONSULT=d.consult||null; cInit();
   }catch(e){ $('#view').innerHTML='<div class="empty">Les fiches n’ont pas pu être chargées. Rechargez la page.</div>'; return }
   merge(); view=fromHash(); render();
   const c=window.claude; if(!c||!c.use) return;
@@ -919,6 +1004,163 @@ async function start(){
   }catch(e){}
 }
 start();
+/* ---------------- Outil Naturo : consultation (rien n'est stocké) ---------------- */
+let CONSULT=null;
+const CONS={v:{},step:'accueil',tgt:[],patho:[],clr:false};
+const cLab=o=>o.replace(/\|[DR]$/,'');
+const cHas=()=>Object.keys(CONS.v).some(k=>{if(k==='date_rdv')return false;const x=CONS.v[k];return Array.isArray(x)?x.length:x!==''&&x!=null})||CONS.patho.length||CONS.tgt.length;
+function cSteps(){ return CONSULT.steps.filter(s=>!(s.cond==='femme'&&CONS.v.sexe==='Homme')) }
+function cFilled(st){
+  let n=0,t=0;
+  for(const sc of st.secs) for(const f of sc.f){ if(f.t==='info') continue; t++; const x=CONS.v[f.k]; if(Array.isArray(x)?x.length:(x!==''&&x!=null)) n++ }
+  if(st.target){ t=1; n=(CONS.tgt.length||CONS.patho.length)?1:0 }
+  return [n,t];
+}
+function cAge(){ const d=CONS.v.naissance; if(!d) return ''; const b=new Date(d), r=CONS.v.date_rdv?new Date(CONS.v.date_rdv):new Date(); if(isNaN(b)) return ''; let a=r.getFullYear()-b.getFullYear(); const m=r.getMonth()-b.getMonth(); if(m<0||(m===0&&r.getDate()<b.getDate())) a--; return a>=0&&a<130?a+' ans':'' }
+function cImc(){ const t=parseFloat(String(CONS.v.taille||'').replace(',','.')), p=parseFloat(String(CONS.v.poids||'').replace(',','.')); if(!(t>50&&p>2)) return ''; const i=p/Math.pow(t/100,2); const c=i<18.5?'insuffisance pondérale':i<25?'corpulence normale':i<30?'surpoids':'obésité'; return `IMC ${i.toFixed(1).replace('.',',')} (${c}, repère indicatif)` }
+function cTally(){ const st=CONSULT.steps.find(s=>s.morpho); let D=0,R=0; for(const sc of st.secs) for(const f of sc.f){ const x=CONS.v[f.k]; for(const v of [].concat(x||[])){ if(/\|D$/.test(v)) D++; if(/\|R$/.test(v)) R++ } } return [D,R] }
+function cTallyHtml(){ const [D,R]=cTally(); if(!D&&!R) return `<div class="c-tally">Les indices de dilatation et de rétraction s'additionnent ici au fil des réponses.</div>`;
+  const o=D>R+1?'plutôt dilatation (sanguino-pléthorique)':R>D+1?'plutôt rétraction (neuro-arthritique)':'profil intermédiaire ou mixte';
+  return `<div class="c-tally"><b>${D}</b> indice${D>1?'s':''} de dilatation · <b>${R}</b> indice${R>1?'s':''} de rétraction → ${o}. <i>Repère indicatif : la conclusion revient à l'observation d'ensemble.</i></div>` }
+function cFind(kind,opt){
+  const g=kind==='morpho'?'Morphologie':'Iridologie';
+  const es=ALL.filter(e=>e.grp===g&&!e.top); const o=cLab(opt).toLowerCase();
+  let m=o.match(/^d(\d)/); if(kind==='irido'&&m) return es.find(e=>e.t.startsWith('Diathèse '+m[1]));
+  const w=o.split(/[ (]/)[0];
+  return es.find(e=>e.t.toLowerCase().replace(/^(le |la |l')/,'').startsWith(w));
+}
+function cField(f){
+  const v=CONS.v[f.k]; const full=f.w||f.t==='ta'||f.t==='m'||f.t==='s'||f.t==='info'||(f.o&&f.o.join('').length>60);
+  const lab=`<label class="c-l" for="cf_${f.k}">${esc(f.l)}</label>`;
+  let h='';
+  if(f.t==='info'){
+    if(f.imc) return `<div class="c-f full"><div class="c-calc" data-imc>${esc(cImc())}</div></div>`;
+    return `<div class="c-f full"><div class="c-info ${f.cls||''}">${esc(f.l)}</div></div>`;
+  }
+  if(f.t==='t') h=`<input id="cf_${f.k}" data-ck="${f.k}" type="text" value="${esc(v||'')}" autocomplete="off">`;
+  else if(f.t==='d') h=`<input id="cf_${f.k}" data-ck="${f.k}" type="date" value="${esc(v||'')}">${f.age?`<span class="c-calc" data-age>${esc(cAge())}</span>`:''}`;
+  else if(f.t==='n') h=`<div class="c-n"><input id="cf_${f.k}" data-ck="${f.k}" type="text" inputmode="decimal" value="${esc(v||'')}" autocomplete="off"><span>${esc(f.u||'')}</span></div>`;
+  else if(f.t==='ta') h=`<textarea id="cf_${f.k}" data-ck="${f.k}" rows="3">${esc(v||'')}</textarea>`;
+  else if(f.t==='s') h=`<div class="c-s"><span>${esc(f.lo)}</span><div class="c-sb">${Array.from({length:11},(_,i)=>`<button type="button" data-cs="${f.k}" data-cv="${i}" aria-pressed="${String(v)===String(i)}">${i}</button>`).join('')}</div><span>${esc(f.hi)}</span></div>`;
+  else if(f.t==='c'||f.t==='m'){
+    const sel=[].concat(v||[]);
+    h=`<div class="c-ch" role="group" aria-label="${esc(f.l)}">${f.o.map(o=>`<button type="button" data-cc="${f.k}" data-cm="${f.t==='m'?1:''}" data-cv="${esc(o)}" aria-pressed="${sel.includes(o)}">${esc(cLab(o))}${/\|[DR]$/.test(o)?`<i>${o.endsWith('D')?'D':'R'}</i>`:''}</button>`).join('')}</div>`;
+    if(f.link) h+=`<div class="c-link" data-clink="${f.k}">${cLinkHtml(f)}</div>`;
+  }
+  return `<div class="c-f${full?' full':''}">${f.t==='c'||f.t==='m'||f.t==='s'?`<span class="c-l">${esc(f.l)}</span>`:lab}${h}</div>`;
+}
+function cLinkHtml(f){ const v=CONS.v[f.k]; if(!v) return ''; const e=cFind(f.link,v); return e?`<button type="button" class="btn sm" data-open="${esc(e.id)}">Voir la fiche « ${esc(e.t)} »</button>`:'' }
+function cTarget(){
+  const pats=ALL.filter(e=>e.cat==='pathologie').sort((a,b)=>a.t.localeCompare(b.t,'fr'));
+  const mods=CONSULT.target.map((m,i)=>`<button type="button" data-ctg="${i}" aria-pressed="${CONS.tgt.includes(i)}">${esc(m.t)}</button>`).join('');
+  const blocks=CONS.tgt.map(i=>{const m=CONSULT.target[i];const k='tgt_'+i;return `<section class="c-sec"><h3>${esc(m.t)}</h3><ul class="c-q">${m.q.map(q=>`<li>${esc(q)}</li>`).join('')}</ul><label class="c-l" for="cf_${k}">Réponses et notes</label><textarea id="cf_${k}" data-ck="${k}" rows="4">${esc(CONS.v[k]||'')}</textarea></section>`}).join('');
+  const pb=CONS.patho.map(id=>{const e=BYID.get(id); if(!e) return ''; const g=t=>(e.blocks||[]).filter(b=>b[0]==='sec'&&b[1].startsWith(t)).flatMap(b=>b[3]); const k='pat_'+id;
+    const q=g('Questions à poser'), a=g("Surveillance et signes d'alerte");
+    return `<section class="c-sec"><div class="c-sh"><h3>${esc(e.t)}</h3><button type="button" class="btn sm" data-cprm="${esc(id)}">Retirer</button></div>
+      ${q.length?`<ul class="c-q">${q.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:'<p class="c-muted">Pas de questions spécifiques sur cette fiche.</p>'}
+      ${a.length?`<div class="c-info alert"><b>Signes d'alerte à rechercher</b><ul>${a.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}
+      <label class="c-l" for="cf_${k}">Réponses et notes</label><textarea id="cf_${k}" data-ck="${k}" rows="4">${esc(CONS.v[k]||'')}</textarea>
+      <div class="c-acts"><button type="button" class="btn sm" data-open="${esc(id)}">Ouvrir la fiche</button><a class="btn sm" href="#conseils-${esc(id)}" target="_blank" rel="noopener">Fiche conseils</a></div></section>`}).join('');
+  return `<section class="c-sec"><h3>Par problématique</h3><p class="c-muted">Choisissez un ou plusieurs thèmes : les questions apparaissent avec une zone de notes.</p><div class="c-ch">${mods}</div></section>${blocks}
+  <section class="c-sec"><h3>Par pathologie</h3><p class="c-muted">Ajoutez une pathologie du référentiel : ses questions d'anamnèse et ses signes d'alerte s'affichent.</p>
+  <div class="c-add"><input id="cpIn" list="cpList" placeholder="Rechercher une pathologie…" autocomplete="off"><datalist id="cpList">${pats.map(e=>`<option value="${esc(e.t)}">`).join('')}</datalist><button type="button" class="btn" data-cpadd>Ajouter</button></div></section>${pb}`;
+}
+function cSynthHead(){
+  const v=CONS.v; const it=(l,x,lk)=>{ if(!x) return ''; const e=lk?cFind(lk,x):null; return `<div><span>${esc(l)}</span><b>${esc(cLab(x))}</b>${e?`<button type="button" class="btn sm" data-open="${esc(e.id)}">Fiche</button>`:''}</div>` };
+  const rows=[it('Tempérament dominant',v.temp1,'morpho'),it('Tempérament secondaire',v.temp2,'morpho'),it('Axe',v.axe),it('Constitution irienne',v.consti,'irido'),it('Densité de la trame',v.densite?v.densite+' / 6':''),it('Diathèse',v.diathese,'irido')].join('');
+  const pats=CONS.patho.map(id=>BYID.get(id)).filter(Boolean);
+  return `<section class="c-sec c-sum"><h3>Ce qui ressort du bilan</h3>${rows?`<div class="c-kv">${rows}</div>`:'<p class="c-muted">Les conclusions morphologiques et iridologiques s\'afficheront ici.</p>'}
+   ${pats.length?`<div class="c-acts"><span class="c-muted">Boîtes à outils :</span>${pats.map(e=>`<button type="button" class="btn sm" data-open="${esc(e.id)}">${esc(e.t)}</button><a class="btn sm" href="#conseils-${esc(e.id)}" target="_blank" rel="noopener">Fiche conseils</a>`).join('')}</div>`:''}</section>`;
+}
+function vConsult(){
+  if(!CONSULT) return `<div class="empty">L'outil de consultation n'a pas pu être chargé.</div>`;
+  const steps=cSteps(); let st=steps.find(s=>s.id===CONS.step)||steps[0]; CONS.step=st.id;
+  const idx=steps.indexOf(st);
+  const nav=['anam','bilan'].map(g=>`<div class="c-navg"><span>${g==='anam'?'Anamnèse':'Bilan et synthèse'}</span>${steps.filter(s=>s.g===g).map(s=>{const [n,t]=cFilled(s);return `<button type="button" data-cstep="${s.id}" aria-current="${s.id===st.id}">${esc(s.t)}${n?`<i>${s.target?'✓':n}</i>`:''}</button>`}).join('')}</div>`).join('');
+  let body='';
+  if(st.target) body=cTarget();
+  else { if(st.synth) body+=cSynthHead(); body+=st.secs.map(sc=>`<section class="c-sec"><h3>${esc(sc.t)}</h3><div class="c-grid">${sc.f.map(cField).join('')}</div></section>`).join(''); if(st.morpho) body=`<div id="cTally">${cTallyHtml()}</div>`+body }
+  const who=[CONS.v.prenom,CONS.v.nom].filter(Boolean).join(' ');
+  return `<div class="c-wrap">
+  <div class="c-head"><div><div class="c-k">Outil Naturo</div><h1>Consultation${who?` · ${esc(who)}`:''}</h1>
+    <p class="c-priv"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Rien n'est enregistré : les réponses restent sur cet écran jusqu'à l'export PDF.</p></div>
+    <div class="c-tools"><button type="button" class="btn primary" data-cprint="full">Exporter en PDF</button><button type="button" class="btn" data-cprint="blank">Grille vierge</button>${CONS.clr?`<button type="button" class="btn danger" data-cclear-ok>Confirmer l'effacement</button><button type="button" class="btn" data-cclear-no>Annuler</button>`:`<button type="button" class="btn" data-cclear>Tout effacer</button>`}</div></div>
+  <nav class="c-nav" aria-label="Étapes">${nav}</nav>
+  <div class="c-step"><h2>${esc(st.t)}</h2>${body}</div>
+  <div class="c-pn">${idx>0?`<button type="button" class="btn" data-cstep="${steps[idx-1].id}">← ${esc(steps[idx-1].t)}</button>`:'<span></span>'}${idx<steps.length-1?`<button type="button" class="btn primary" data-cstep="${steps[idx+1].id}">${esc(steps[idx+1].t)} →</button>`:`<button type="button" class="btn primary" data-cprint="full">Exporter en PDF</button>`}</div>
+  </div>`;
+}
+/* rapport imprimable */
+function cVal(f){ const x=CONS.v[f.k]; if(x==null||x===''||(Array.isArray(x)&&!x.length)) return '';
+  if(f.t==='s') return x+' / 10'; if(f.t==='d'&&x){ const p=x.split('-'); return p.length===3?`${p[2]}/${p[1]}/${p[0]}`+(f.age&&cAge()?` (${cAge()})`:''):x }
+  if(f.t==='n') return x+(f.u?' '+f.u:''); if(Array.isArray(x)) return x.map(cLab).join(', '); return cLab(String(x)) }
+function cReport(blank){
+  const steps=cSteps(); const v=CONS.v; const who=[v.prenom,v.nom].filter(Boolean).join(' ');
+  const ln='<span class="r-ln"></span>';
+  let out=`<header class="r-head"><div class="r-k">Bilan de vitalité naturopathique</div><h1>${blank?'Grille de consultation':esc(who||'Consultation')}</h1>
+    <div class="r-meta">${blank?'<span>Nom : ................................</span><span>Date : ..................</span>':`${v.date_rdv?`<span>Consultation du ${esc(cVal({k:'date_rdv',t:'d'}))}</span>`:''}${v.naissance?`<span>Âge : ${esc(cAge())}</span>`:''}${v[ 'accueil_type_de_rendez_vous']?`<span>${esc(v['accueil_type_de_rendez_vous'])}</span>`:''}`}</div></header>`;
+  for(const st of steps){
+    let secs='';
+    if(st.target){
+      if(blank){ secs=CONSULT.target.map(m=>`<div class="r-sec"><h3>${esc(m.t)}</h3><ul>${m.q.map(q=>`<li>${esc(q)}${ln}</li>`).join('')}</ul></div>`).join('') }
+      else { secs=CONS.tgt.map(i=>{const m=CONSULT.target[i],n=v['tgt_'+i];return n?`<div class="r-sec"><h3>${esc(m.t)}</h3><p>${esc(n)}</p></div>`:''}).join('')+CONS.patho.map(id=>{const e=BYID.get(id),n=v['pat_'+id];return e?`<div class="r-sec"><h3>${esc(e.t)}</h3>${n?`<p>${esc(n)}</p>`:'<p class="r-mut">Questions abordées, sans note.</p>'}</div>`:''}).join('') }
+    } else for(const sc of st.secs){
+      const rows=sc.f.filter(f=>f.t!=='info'||f.imc).map(f=>{
+        if(f.imc){ const t=cImc(); return blank||!t?'':`<tr><th>Repère</th><td>${esc(t)}</td></tr>` }
+        if(blank){ const o=f.o?`<span class="r-opts">${f.o.map(x=>'☐ '+esc(cLab(x))).join('&nbsp;&nbsp; ')}</span>`:f.t==='s'?`<span class="r-opts">0 1 2 3 4 5 6 7 8 9 10</span>`:''; return `<tr><th>${esc(f.l)}</th><td>${o}${f.o||f.t==='s'?'':ln}${f.t==='ta'?ln+ln:''}</td></tr>` }
+        const x=cVal(f); return x?`<tr><th>${esc(f.l)}</th><td>${esc(x).replace(/\n/g,'<br>')}</td></tr>`:'' }).join('');
+      if(rows) secs+=`<div class="r-sec"><h3>${esc(sc.t)}</h3><table>${rows}</table></div>`;
+    }
+    if(st.morpho&&!blank){ const [D,R]=cTally(); if(D||R) secs=`<p class="r-mut">Indices observés : ${D} de dilatation, ${R} de rétraction (repère indicatif).</p>`+secs }
+    if(secs) out+=`<section class="r-step"><h2>${esc(st.t)}</h2>${secs}</section>`;
+  }
+  out+=`<p class="r-foot">Bilan de vitalité naturopathique : évaluation du terrain et de l'hygiène de vie, sans valeur de diagnostic médical. Il ne remplace pas le suivi médical et ne modifie aucun traitement. Document confidentiel contenant des données de santé : à conserver de façon sécurisée.</p>`;
+  return out;
+}
+function cPrint(mode){
+  let box=document.getElementById('cprint'); if(!box){ box=document.createElement('div'); box.id='cprint'; document.body.appendChild(box) }
+  box.innerHTML=cReport(mode==='blank');
+  const who=[CONS.v.nom,CONS.v.prenom].filter(Boolean).join(' '); const old=document.title;
+  document.title=mode==='blank'?'Grille de consultation naturopathique':('Bilan naturo'+(who?' - '+who:'')+(CONS.v.date_rdv?' - '+CONS.v.date_rdv:''));
+  document.body.classList.add('cprint');
+  const done=()=>{document.body.classList.remove('cprint');document.title=old;window.removeEventListener('afterprint',done)};
+  window.addEventListener('afterprint',done);
+  setTimeout(()=>window.print(),60);
+}
+function cSet(k,val){ if(val===''||val==null||(Array.isArray(val)&&!val.length)) delete CONS.v[k]; else CONS.v[k]=val }
+function cRefreshNav(){ const nv=document.querySelector('.c-nav'); if(!nv) return; for(const b of nv.querySelectorAll('[data-cstep]')){ const s=CONSULT.steps.find(x=>x.id===b.dataset.cstep); const [n]=cFilled(s); let i=b.querySelector('i'); if(n){ if(!i){i=document.createElement('i');b.appendChild(i)} i.textContent=s.target?'✓':n } else if(i) i.remove() } }
+document.addEventListener('input',ev=>{
+  const t=ev.target; if(!t.dataset||!t.dataset.ck||view.name!=='consult') return;
+  cSet(t.dataset.ck,t.value);
+  if(t.dataset.ck==='naissance'||t.dataset.ck==='date_rdv'){const a=document.querySelector('[data-age]'); if(a) a.textContent=cAge()}
+  if(t.dataset.ck==='taille'||t.dataset.ck==='poids'){const a=document.querySelector('[data-imc]'); if(a) a.textContent=cImc()}
+  if(t.dataset.ck==='nom'||t.dataset.ck==='prenom'){const h=document.querySelector('.c-head h1'); const w=[CONS.v.prenom,CONS.v.nom].filter(Boolean).join(' '); if(h) h.textContent='Consultation'+(w?' · '+w:'')}
+  cRefreshNav();
+});
+document.addEventListener('click',ev=>{
+  if(view.name!=='consult') return;
+  const t=ev.target.closest('button'); if(!t) return; const d=t.dataset;
+  if(d.cstep){ CONS.step=d.cstep; CONS.clr=false; render(); window.scrollTo({top:0}); return }
+  if(d.cc){ const f=CONSULT.steps.flatMap(s=>s.secs.flatMap(x=>x.f)).find(x=>x.k===d.cc);
+    if(d.cm){ const a=[].concat(CONS.v[d.cc]||[]); const i=a.indexOf(d.cv); if(i>=0)a.splice(i,1); else a.push(d.cv); cSet(d.cc,a); t.setAttribute('aria-pressed',i<0) }
+    else { const on=CONS.v[d.cc]===d.cv; cSet(d.cc,on?'':d.cv); for(const b of t.parentNode.children) b.setAttribute('aria-pressed',!on&&b===t) }
+    if(d.cc==='sexe'){ render(); return }
+    if(f&&f.link){ const l=document.querySelector(`[data-clink="${d.cc}"]`); if(l) l.innerHTML=cLinkHtml(f) }
+    const tl=document.getElementById('cTally'); if(tl) tl.innerHTML=cTallyHtml(); cRefreshNav(); return }
+  if(d.cs){ const on=String(CONS.v[d.cs])===d.cv; cSet(d.cs,on?'':d.cv); for(const b of t.parentNode.children) b.setAttribute('aria-pressed',!on&&b===t); cRefreshNav(); return }
+  if(d.ctg!==undefined){ const i=+d.ctg, j=CONS.tgt.indexOf(i); if(j>=0) CONS.tgt.splice(j,1); else CONS.tgt.push(i); render(); return }
+  if('cpadd' in d){ const q=($('#cpIn').value||'').trim().toLowerCase(); const e=ALL.find(x=>x.cat==='pathologie'&&x.t.toLowerCase()===q)||ALL.find(x=>x.cat==='pathologie'&&x.t.toLowerCase().includes(q)&&q.length>2);
+    if(!e){ toast('Pathologie introuvable : choisissez-la dans la liste'); return } if(!CONS.patho.includes(e.id)) CONS.patho.push(e.id); render(); return }
+  if(d.cprm){ CONS.patho=CONS.patho.filter(x=>x!==d.cprm); render(); return }
+  if(d.cprint){ cPrint(d.cprint); return }
+  if('cclear' in d){ CONS.clr=true; render(); return }
+  if('cclearNo' in d){ CONS.clr=false; render(); return }
+  if('cclearOk' in d){ CONS.v={}; CONS.tgt=[]; CONS.patho=[]; CONS.clr=false; CONS.step='accueil'; cInit(); render(); window.scrollTo({top:0}); toast('Consultation effacée'); return }
+});
+document.addEventListener('keydown',ev=>{ if(ev.key==='Enter'&&ev.target.id==='cpIn'){ ev.preventDefault(); const b=document.querySelector('[data-cpadd]'); if(b) b.click() } });
+window.addEventListener('beforeunload',ev=>{ if(CONSULT&&cHas()){ ev.preventDefault(); ev.returnValue='' } });
+function cInit(){ const d=new Date(); CONS.v.date_rdv=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0') }
+
 })();
 </script>
 
