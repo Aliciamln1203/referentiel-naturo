@@ -1210,16 +1210,16 @@ async function cPrint(mode){
   const wrap=document.createElement('div'); wrap.style.cssText='position:absolute;left:-10000px;top:0;width:700px';
   const el=document.createElement('div'); el.className='r-doc'; el.innerHTML=(mode==='conseils'?cClientSheet():cReport(mode==='blank')); wrap.appendChild(el); document.body.appendChild(wrap);
   const h=el.scrollHeight; const scale=Math.max(1,Math.min(2,Math.sqrt(15e6/(700*Math.max(h,1)))));
-  const name=cPdfName(mode);
+  const name=cPdfName(mode); const sy=window.scrollY, sx=window.scrollX; window.scrollTo(0,0);
   try{
     const blob=await lib().set({margin:[12,12,14,12],filename:name,image:{type:'jpeg',quality:0.95},
-      html2canvas:{scale,backgroundColor:'#ffffff',logging:false},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
-      pagebreak:{mode:['css','legacy'],avoid:['tr','h2','h3','.r-head','.r-mut','li','.r-foot']}}).from(el).outputPdf('blob');
+      html2canvas:{scale,backgroundColor:'#ffffff',logging:false,scrollX:0,scrollY:0},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
+      pagebreak:{mode:['css','legacy'],avoid:['tr','h2','h3','.r-head','.r-mut','li','p','.r-foot']}}).from(el).outputPdf('blob');
     wrap.remove();
     const r=await cSaveBlob(blob,name);
     if(r==='ok') toast('PDF prêt : « '+name+' »'); else if(r==='declined') toast('Enregistrement annulé'); else toast('Une fenêtre d\'enregistrement est déjà ouverte');
   }catch(e){ toast("Le PDF n'a pas pu être créé, réessaie dans un instant") }
-  finally{ wrap.remove(); restore() }
+  finally{ wrap.remove(); restore(); window.scrollTo(sx,sy) }
 }
 function cSet(k,val){ if(val===''||val==null||(Array.isArray(val)&&!val.length)) delete CONS.v[k]; else CONS.v[k]=val }
 function cRefreshNav(){ const nv=document.querySelector('.c-nav'); if(!nv) return; for(const b of nv.querySelectorAll('[data-cstep]')){ const s=CONSULT.steps.find(x=>x.id===b.dataset.cstep); const [n]=cFilled(s); let i=b.querySelector('i'); if(n){ if(!i){i=document.createElement('i');b.appendChild(i)} i.textContent=s.target?'✓':n } else if(i) i.remove() } }
@@ -1358,18 +1358,20 @@ function cAdviceStep(){
    <section class="c-sec"><h3>Ajouter un conseil libre</h3><div class="c-grid"><div class="c-f"><span class="c-l">Thème</span><select id="cfCat">${CCATS.map(c=>`<option>${esc(c)}</option>`).join('')}</select></div><div class="c-f full"><label class="c-l" for="cfTxt">Conseil</label><textarea id="cfTxt" rows="2"></textarea></div></div><div><button type="button" class="btn" data-cfree>Ajouter à la liste</button></div></section>`;
 }
 function cAlertsSel(){ const ids=[...new Set([...CONS.sel.values()].map(o=>o.id).filter(i=>i!=='free'))]; const A=[]; for(const id of ids){ const s=cSubj(id); if(s) for(const a of s.alert) if(!A.includes(a)) A.push(a) } return [ids,A] }
+function cBul(t){ return String(t||'').split(/\n+|\s+[-–•·]\s+(?=[A-ZÀ-ÝŒ0-9])/).map(x=>x.replace(/^\s*[-–•·*]\s*/,'').trim()).filter(Boolean) }
+function cLis(L){ return L.flatMap(([k,o])=>cBul(o.txt)).map(x=>`<li>${esc(x)}</li>`).join('') }
 function cClientSheet(){
   const v=CONS.v, who=[v.prenom,v.nom].filter(Boolean).join(' '); const [ids,A]=cAlertsSel();
   const prio=v.prio||''; const rdv=v[cKey('synthese','Prochain rendez-vous')]||'';
   const G=cGrouped();
   return `<header class="r-head"><div class="r-k">Fiche conseils naturopathiques</div><h1>${esc(who||'Mes conseils')}</h1><div class="r-meta">${v.date_rdv?`<span>Consultation du ${esc(cVal({k:'date_rdv',t:'d'}))}</span>`:''}${ids.length?`<span>${ids.map(i=>esc((BYID.get(i)||{}).t||'')).join(' · ')}</span>`:''}</div></header>
-   ${prio?`<section class="r-step"><h2>Mes priorités pour les prochaines semaines</h2><p>${esc(prio)}</p></section>`:''}
-   ${G.map(([c,L])=>`<section class="r-step"><h2>${esc(c==='Précautions'?'Précautions à respecter':c)}</h2><ul>${L.map(([k,o])=>`<li>${esc(o.txt)}</li>`).join('')}</ul></section>`).join('')}
+   ${prio?`<section class="r-step"><h2>Mes priorités pour les prochaines semaines</h2><ul>${cBul(prio).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></section>`:''}
+   ${G.map(([c,L])=>`<section class="r-step"><h2>${esc(c==='Précautions'?'Précautions à respecter':c)}</h2><ul>${cLis(L)}</ul></section>`).join('')}
    ${A.length?`<section class="r-step r-al"><h2>Consulter sans attendre si</h2><ul>${A.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></section>`:''}
    ${rdv?`<section class="r-step"><h2>Prochain rendez-vous</h2><p>${esc(rdv)}</p></section>`:''}
    <p class="r-foot">Ces conseils d'hygiène de vie accompagnent le suivi médical et ne le remplacent pas. Ne jamais arrêter ni modifier un traitement sans l'avis du médecin. Avant de prendre une plante, une huile essentielle ou un complément, signaler tout traitement en cours, une grossesse ou un allaitement.</p>`;
 }
-function cAdviceReport(){ const G=cGrouped(); if(!G.length) return ''; return G.map(([c,L])=>`<div class="r-sec"><h3>${esc(c)}</h3><ul>${L.map(([k,o])=>`<li>${esc(o.txt)}</li>`).join('')}</ul></div>`).join('') }
+function cAdviceReport(){ const G=cGrouped(); if(!G.length) return ''; return G.map(([c,L])=>`<div class="r-sec"><h3>${esc(c)}</h3><ul>${cLis(L)}</ul></div>`).join('') }
 function vConsult(){
   setTimeout(cFabRefresh,0);
   return `<div class="c-layout${CONS.drawer?' drawer':''}"><div class="c-main">${vConsultMain()}</div><aside id="cAside" class="c-aside" aria-label="Conseils du référentiel">${cAsideHtml()}</aside></div><button type="button" class="c-fab" data-cfab hidden></button>`;
