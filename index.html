@@ -1072,7 +1072,7 @@ function cFilled(st){
   if(st.advice){ t=1; n=CONS.sel.size?1:0 }
   return [n,t];
 }
-function cAge(){ const d=CONS.v.naissance; if(!d) return ''; const b=new Date(d), r=CONS.v.date_rdv?new Date(CONS.v.date_rdv):new Date(); if(isNaN(b)) return ''; let a=r.getFullYear()-b.getFullYear(); const m=r.getMonth()-b.getMonth(); if(m<0||(m===0&&r.getDate()<b.getDate())) a--; return a>=0&&a<130?a+' ans':'' }
+function cAge(){ const a=parseInt(String(CONS.v.age||'').replace(/[^0-9]/g,''),10); return a>=0&&a<130?a+' ans':'' }
 function cImc(){ const t=parseFloat(String(CONS.v.taille||'').replace(',','.')), p=parseFloat(String(CONS.v.poids||'').replace(',','.')); if(!(t>50&&p>2)) return ''; const i=p/Math.pow(t/100,2); const c=i<18.5?'insuffisance pondérale':i<25?'corpulence normale':i<30?'surpoids':'obésité'; return `IMC ${i.toFixed(1).replace('.',',')} (${c}, repère indicatif)` }
 function cTally(){ const st=CONSULT.steps.find(s=>s.morpho); let D=0,R=0; for(const sc of st.secs) for(const f of sc.f){ const x=CONS.v[f.k]; for(const v of [].concat(x||[])){ if(/\|D$/.test(v)) D++; if(/\|R$/.test(v)) R++ } } return [D,R] }
 function cTallyHtml(){ const [D,R]=cTally(); if(!D&&!R) return `<div class="c-tally">Les indices de dilatation et de rétraction s'additionnent ici au fil des réponses.</div>`;
@@ -1155,7 +1155,7 @@ function cReport(blank){
   const steps=cSteps(); const v=CONS.v; const who=[v.prenom,v.nom].filter(Boolean).join(' ');
   const ln='<span class="r-ln"></span>';
   let out=`<header class="r-head"><div class="r-k">Bilan de vitalité naturopathique</div><h1>${blank?'Grille de consultation':esc(who||'Consultation')}</h1>
-    <div class="r-meta">${blank?'<span>Nom : ................................</span><span>Date : ..................</span>':`${v.date_rdv?`<span>Consultation du ${esc(cVal({k:'date_rdv',t:'d'}))}</span>`:''}${v.naissance?`<span>Âge : ${esc(cAge())}</span>`:''}${v[ 'accueil_type_de_rendez_vous']?`<span>${esc(v['accueil_type_de_rendez_vous'])}</span>`:''}`}</div></header>`;
+    <div class="r-meta">${blank?'<span>Nom : ................................</span><span>Date : ..................</span>':`${v.date_rdv?`<span>Consultation du ${esc(cVal({k:'date_rdv',t:'d'}))}</span>`:''}${cAge()?`<span>Âge : ${esc(cAge())}</span>`:''}${v[ 'accueil_type_de_rendez_vous']?`<span>${esc(v['accueil_type_de_rendez_vous'])}</span>`:''}`}</div></header>`;
   for(const st of steps){
     let secs='';
     if(st.target){
