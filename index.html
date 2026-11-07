@@ -234,27 +234,80 @@ ol.steps li::before{content:counter(st);position:absolute;left:0;top:-1px;width:
 .cat.c-tile svg{grid-row:span 2;width:34px;height:34px;color:var(--accent)}
 .cat.c-tile b{font-size:16px}.cat.c-tile span{color:var(--muted);opacity:1}
 #cprint{display:none}
+.c-f select{width:100%;font:inherit;font-size:15px;color:var(--ink);background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:9px 11px}
+body.cwide .shell{grid-template-columns:minmax(0,1fr)}
+body.cwide nav.side{display:none}
+.c-layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:22px;align-items:start}
+.c-aside{position:sticky;top:calc(84px + env(safe-area-inset-top,0px));max-height:calc(100vh - 100px - env(safe-area-inset-top,0px));overflow:auto;display:grid;gap:10px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow);scrollbar-width:thin;overscroll-behavior:contain}
+.ca-head{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
+.ca-head h3{margin:0;font-size:16px;font-weight:600;color:var(--accent)}
+.ca-head p{margin:3px 0 0;font-size:12px;line-height:1.45;color:var(--muted)}
+.ca-head .btn{flex:none;white-space:nowrap}
+.ca-x{display:none;border:0;background:var(--surface-2);color:var(--ink);width:32px;height:32px;border-radius:50%;cursor:pointer;flex:none}
+.ca-empty{font-size:13.5px;line-height:1.55;color:var(--muted);background:var(--surface-2);border-radius:12px;padding:14px}
+.ca-card{border:1px solid var(--line);border-radius:14px;background:var(--surface-2);overflow:hidden}
+.ca-card.open{background:var(--surface)}
+.ca-h{all:unset;box-sizing:border-box;width:100%;display:flex;gap:8px;align-items:center;padding:11px 13px 2px;cursor:pointer;font-weight:600;font-size:14px;color:var(--ink)}
+.ca-h:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
+.ca-t{flex:1}
+.ca-h i{font-style:normal;font-size:11px;background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:1px 7px}
+.ca-h svg{flex:none;color:var(--muted);transition:transform .2s}.ca-card.open .ca-h svg{transform:rotate(180deg)}
+.ca-src{font-size:11.5px;color:var(--muted);padding:0 13px 10px}
+.ca-acts{display:flex;gap:6px;flex-wrap:wrap;padding:0 13px 8px}
+.ca-g{padding:8px 13px;border-top:1px solid var(--line)}
+.ca-gh{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.ca-g h4{margin:0;font-size:12.5px;font-weight:600;color:var(--accent);text-transform:none}
+.ca-g.warn h4{color:var(--k-alert-ink,#9E3D55)}
+.ca-all{border:0;background:none;color:var(--accent);font:inherit;font-size:12px;font-weight:500;cursor:pointer;padding:4px 0;text-decoration:underline;text-underline-offset:2px}
+.ca-g ul{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:4px}
+.ca-g li button{all:unset;box-sizing:border-box;width:100%;display:flex;gap:9px;align-items:flex-start;font-size:13px;line-height:1.45;color:var(--ink);padding:6px 8px;border-radius:9px;cursor:pointer}
+.ca-g li button:hover{background:var(--surface-2)}
+.ca-g li button:focus-visible{outline:2px solid var(--focus)}
+.ca-g li .ck{flex:none;width:20px;height:20px;border-radius:6px;border:1.5px solid var(--accent);color:var(--accent);display:grid;place-items:center;font-size:13px;font-weight:700;margin-top:1px}
+.ca-g li button[aria-pressed="true"]{background:var(--accent-soft)}
+.ca-g li button[aria-pressed="true"] .ck{background:var(--accent);color:var(--accent-ink)}
+.ca-g li.w .ck{border-color:var(--k-alert-line,#E7A9B8);color:var(--k-alert-ink,#9E3D55)}
+.ca-card .c-info.alert{margin:8px 13px 13px}
+.c-aside .c-add input{font-size:14px;padding:8px 10px}
+.cr-it{display:grid;gap:4px}
+.cr-it textarea{width:100%;font:inherit;font-size:14.5px;line-height:1.5;color:var(--ink);background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;resize:vertical}
+.cr-m{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:12px;color:var(--muted)}
+.c-fab{display:none}
+.r-doc .r-al{background:#FCEEF1;border-radius:10px;padding:2px 14px 8px}.r-doc .r-al h2{color:#9E3D55;border-color:#F0C7D1}
+.r-doc .r-step ul li{margin:3px 0}
+@media (max-width:1100px){
+ .c-layout{grid-template-columns:minmax(0,1fr)}
+ .c-aside{position:fixed;z-index:60;right:0;top:0;bottom:0;width:min(440px,100%);max-height:none;border-radius:20px 0 0 20px;transform:translateX(105%);transition:transform .25s;padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px))}
+ .c-layout.drawer .c-aside{transform:none}
+ body.cdrawer::after{content:"";position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:55}
+ .ca-x{display:block}
+ .c-fab{display:inline-flex;position:fixed;z-index:50;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--accent);color:var(--accent-ink);border:0;border-radius:999px;padding:12px 18px;font:inherit;font-size:14px;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,.18);cursor:pointer}
+ .c-fab[hidden]{display:none!important}
+}
+@media print{.c-aside,.c-fab{display:none!important}}
+
 @media (max-width:640px){.c-grid{grid-template-columns:minmax(0,1fr)}.c-head{padding:18px}.c-sec{padding:14px}.c-navg{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-16px;padding-inline:16px}.c-navg>span{min-width:auto;white-space:nowrap;margin-right:4px}.c-navg button{white-space:nowrap;flex:none}.c-head{margin-top:10px}.c-tools .btn{flex:1 1 auto;justify-content:center}}
+.r-doc{background:#fff;color:#222;font-family:Poppins,system-ui,sans-serif;font-size:13px;line-height:1.45;width:700px;box-sizing:border-box}
+.r-doc .r-head{background:#EAF3EC;border-radius:10px;padding:14px 18px;margin-bottom:12px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.r-doc .r-k{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#2F6B4E}
+.r-doc h1{font-size:23px;margin:2px 0 6px;color:#24543D;font-weight:600}
+.r-doc .r-meta{display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#555}
+.r-doc .r-step{margin-top:12px}
+.r-doc h2{font-size:17px;color:#2F6B4E;border-bottom:1.5px solid #CFE3D5;padding-bottom:3px;margin:14px 0 6px;font-weight:600;break-after:avoid}
+.r-doc h3{font-size:13.5px;margin:9px 0 3px;color:#3F5F4C;font-weight:600;break-after:avoid}
+.r-doc table{width:100%;border-collapse:collapse}
+.r-doc th{text-align:left;font-weight:500;width:38%;padding:4px 8px 4px 0;vertical-align:top;color:#555;border-bottom:1px solid #EEE}
+.r-doc td{padding:4px 0;vertical-align:top;border-bottom:1px solid #EEE}
+.r-doc p{margin:2px 0;white-space:pre-wrap}
+.r-doc ul{margin:2px 0;padding-left:18px}
+.r-doc .r-ln{display:block;border-bottom:1px dotted #AAA;height:20px}
+.r-doc .r-opts{display:block;font-size:11.5px;line-height:1.7;color:#444}
+.r-doc .r-mut{color:#777;font-size:11.5px}
+.r-doc .r-foot{margin-top:18px;font-size:11px;color:#666;border-top:1px solid #DDD;padding-top:6px}
 @media print{
  body.cprint>*:not(#cprint){display:none!important}
- body.cprint #cprint{display:block!important;color:#222;font-size:10.5pt;line-height:1.45}
- #cprint .r-head{background:#EAF3EC;border-radius:10px;padding:12px 16px;margin-bottom:12px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
- #cprint .r-k{font-size:9pt;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#2F6B4E}
- #cprint h1{font-size:18pt;margin:2px 0 6px;color:#24543D}
- #cprint .r-meta{display:flex;gap:20px;flex-wrap:wrap;font-size:9.5pt;color:#555}
- #cprint .r-step{margin-top:12px}
- #cprint h2{font-size:13pt;color:#2F6B4E;border-bottom:1.5px solid #CFE3D5;padding-bottom:3px;margin:12px 0 6px;break-after:avoid}
- #cprint h3{font-size:10.5pt;margin:8px 0 3px;color:#3F5F4C;break-after:avoid}
+ body.cprint #cprint{display:block!important;width:auto}
  #cprint .r-sec{break-inside:avoid}
- #cprint table{width:100%;border-collapse:collapse}
- #cprint th{text-align:left;font-weight:500;width:38%;padding:3px 8px 3px 0;vertical-align:top;color:#555;border-bottom:1px solid #EEE}
- #cprint td{padding:3px 0;vertical-align:top;border-bottom:1px solid #EEE}
- #cprint p{margin:2px 0;white-space:pre-wrap}
- #cprint ul{margin:2px 0;padding-left:16px}
- #cprint .r-ln{display:block;border-bottom:1px dotted #AAA;height:18px}
- #cprint .r-opts{font-size:9pt;color:#444}
- #cprint .r-mut{color:#777;font-size:9pt}
- #cprint .r-foot{margin-top:16px;font-size:8.5pt;color:#666;border-top:1px solid #DDD;padding-top:6px}
 }
 
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 18px}
@@ -585,6 +638,8 @@ function render(scroll){
   else if (view.name==='consult') el.innerHTML=vConsult();
   else el.innerHTML=vHome();
   document.body.classList.toggle('pmode',view.name==='conseils');
+  document.body.classList.toggle('cwide',view.name==='consult');
+  if(view.name!=='consult'){ document.body.classList.remove('cdrawer'); if(typeof CONS!=='undefined') CONS.drawer=false }
   if (scroll && view.name!=='search') window.scrollTo({top:0});
   if (scroll && view.name==='fiche' && view.hl){ const m=el.querySelector('article mark'); if(m) m.scrollIntoView({block:'center'}) }
 }
@@ -1008,12 +1063,13 @@ start();
 let CONSULT=null;
 const CONS={v:{},step:'accueil',tgt:[],patho:[],clr:false};
 const cLab=o=>o.replace(/\|[DR]$/,'');
-const cHas=()=>Object.keys(CONS.v).some(k=>{if(k==='date_rdv')return false;const x=CONS.v[k];return Array.isArray(x)?x.length:x!==''&&x!=null})||CONS.patho.length||CONS.tgt.length;
+const cHas=()=>Object.keys(CONS.v).some(k=>{if(k==='date_rdv')return false;const x=CONS.v[k];return Array.isArray(x)?x.length:x!==''&&x!=null})||CONS.patho.length||CONS.tgt.length||(CONS.sel&&CONS.sel.size);
 function cSteps(){ return CONSULT.steps.filter(s=>!(s.cond==='femme'&&CONS.v.sexe==='Homme')) }
 function cFilled(st){
   let n=0,t=0;
   for(const sc of st.secs) for(const f of sc.f){ if(f.t==='info') continue; t++; const x=CONS.v[f.k]; if(Array.isArray(x)?x.length:(x!==''&&x!=null)) n++ }
   if(st.target){ t=1; n=(CONS.tgt.length||CONS.patho.length)?1:0 }
+  if(st.advice){ t=1; n=CONS.sel.size?1:0 }
   return [n,t];
 }
 function cAge(){ const d=CONS.v.naissance; if(!d) return ''; const b=new Date(d), r=CONS.v.date_rdv?new Date(CONS.v.date_rdv):new Date(); if(isNaN(b)) return ''; let a=r.getFullYear()-b.getFullYear(); const m=r.getMonth()-b.getMonth(); if(m<0||(m===0&&r.getDate()<b.getDate())) a--; return a>=0&&a<130?a+' ans':'' }
@@ -1072,22 +1128,23 @@ function cSynthHead(){
   return `<section class="c-sec c-sum"><h3>Ce qui ressort du bilan</h3>${rows?`<div class="c-kv">${rows}</div>`:'<p class="c-muted">Les conclusions morphologiques et iridologiques s\'afficheront ici.</p>'}
    ${pats.length?`<div class="c-acts"><span class="c-muted">Boîtes à outils :</span>${pats.map(e=>`<button type="button" class="btn sm" data-open="${esc(e.id)}">${esc(e.t)}</button><a class="btn sm" href="#conseils-${esc(e.id)}" target="_blank" rel="noopener">Fiche conseils</a>`).join('')}</div>`:''}</section>`;
 }
-function vConsult(){
+function vConsultMain(){
   if(!CONSULT) return `<div class="empty">L'outil de consultation n'a pas pu être chargé.</div>`;
   const steps=cSteps(); let st=steps.find(s=>s.id===CONS.step)||steps[0]; CONS.step=st.id;
   const idx=steps.indexOf(st);
   const nav=['anam','bilan'].map(g=>`<div class="c-navg"><span>${g==='anam'?'Anamnèse':'Bilan et synthèse'}</span>${steps.filter(s=>s.g===g).map(s=>{const [n,t]=cFilled(s);return `<button type="button" data-cstep="${s.id}" aria-current="${s.id===st.id}">${esc(s.t)}${n?`<i>${s.target?'✓':n}</i>`:''}</button>`}).join('')}</div>`).join('');
   let body='';
   if(st.target) body=cTarget();
+  else if(st.advice) body=cAdviceStep();
   else { if(st.synth) body+=cSynthHead(); body+=st.secs.map(sc=>`<section class="c-sec"><h3>${esc(sc.t)}</h3><div class="c-grid">${sc.f.map(cField).join('')}</div></section>`).join(''); if(st.morpho) body=`<div id="cTally">${cTallyHtml()}</div>`+body }
   const who=[CONS.v.prenom,CONS.v.nom].filter(Boolean).join(' ');
   return `<div class="c-wrap">
   <div class="c-head"><div><div class="c-k">Outil Naturo</div><h1>Consultation${who?` · ${esc(who)}`:''}</h1>
-    <p class="c-priv"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Rien n'est enregistré : les réponses restent sur cet écran jusqu'à l'export PDF.</p></div>
-    <div class="c-tools"><button type="button" class="btn primary" data-cprint="full">Exporter en PDF</button><button type="button" class="btn" data-cprint="blank">Grille vierge</button>${CONS.clr?`<button type="button" class="btn danger" data-cclear-ok>Confirmer l'effacement</button><button type="button" class="btn" data-cclear-no>Annuler</button>`:`<button type="button" class="btn" data-cclear>Tout effacer</button>`}</div></div>
+    <p class="c-priv"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Rien n'est enregistré en ligne : les réponses restent sur cet écran jusqu'au téléchargement du PDF.</p></div>
+    <div class="c-tools"><button type="button" class="btn primary" data-cprint="full">Télécharger le PDF</button><button type="button" class="btn" data-cprint="blank">Grille vierge (PDF)</button>${CONS.clr?`<button type="button" class="btn danger" data-cclear-ok>Confirmer l'effacement</button><button type="button" class="btn" data-cclear-no>Annuler</button>`:`<button type="button" class="btn" data-cclear>Tout effacer</button>`}</div></div>
   <nav class="c-nav" aria-label="Étapes">${nav}</nav>
   <div class="c-step"><h2>${esc(st.t)}</h2>${body}</div>
-  <div class="c-pn">${idx>0?`<button type="button" class="btn" data-cstep="${steps[idx-1].id}">← ${esc(steps[idx-1].t)}</button>`:'<span></span>'}${idx<steps.length-1?`<button type="button" class="btn primary" data-cstep="${steps[idx+1].id}">${esc(steps[idx+1].t)} →</button>`:`<button type="button" class="btn primary" data-cprint="full">Exporter en PDF</button>`}</div>
+  <div class="c-pn">${idx>0?`<button type="button" class="btn" data-cstep="${steps[idx-1].id}">← ${esc(steps[idx-1].t)}</button>`:'<span></span>'}${idx<steps.length-1?`<button type="button" class="btn primary" data-cstep="${steps[idx+1].id}">${esc(steps[idx+1].t)} →</button>`:`<button type="button" class="btn primary" data-cprint="full">Télécharger le PDF</button>`}</div>
   </div>`;
 }
 /* rapport imprimable */
@@ -1111,21 +1168,45 @@ function cReport(blank){
         const x=cVal(f); return x?`<tr><th>${esc(f.l)}</th><td>${esc(x).replace(/\n/g,'<br>')}</td></tr>`:'' }).join('');
       if(rows) secs+=`<div class="r-sec"><h3>${esc(sc.t)}</h3><table>${rows}</table></div>`;
     }
+    if(st.advice&&!blank) secs=cAdviceReport();
     if(st.morpho&&!blank){ const [D,R]=cTally(); if(D||R) secs=`<p class="r-mut">Indices observés : ${D} de dilatation, ${R} de rétraction (repère indicatif).</p>`+secs }
     if(secs) out+=`<section class="r-step"><h2>${esc(st.t)}</h2>${secs}</section>`;
   }
   out+=`<p class="r-foot">Bilan de vitalité naturopathique : évaluation du terrain et de l'hygiène de vie, sans valeur de diagnostic médical. Il ne remplace pas le suivi médical et ne modifie aucun traitement. Document confidentiel contenant des données de santé : à conserver de façon sécurisée.</p>`;
   return out;
 }
-function cPrint(mode){
-  let box=document.getElementById('cprint'); if(!box){ box=document.createElement('div'); box.id='cprint'; document.body.appendChild(box) }
-  box.innerHTML=cReport(mode==='blank');
-  const who=[CONS.v.nom,CONS.v.prenom].filter(Boolean).join(' '); const old=document.title;
-  document.title=mode==='blank'?'Grille de consultation naturopathique':('Bilan naturo'+(who?' - '+who:'')+(CONS.v.date_rdv?' - '+CONS.v.date_rdv:''));
+function cPdfName(mode){ const who=[CONS.v.nom,CONS.v.prenom].filter(Boolean).join(' '); return ((mode==='blank'?'Grille de consultation naturopathique':((mode==='conseils'?'Fiche conseils':'Bilan naturo')+(who?' - '+who:'')+(CONS.v.date_rdv?' - '+CONS.v.date_rdv:'')))).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[\/\\:*?"<>|]/g,'')+'.pdf' }
+let H2P=null;
+function cLoadH2P(){
+  if(window.html2pdf) return Promise.resolve(window.html2pdf);
+  if(H2P) return H2P;
+  const src=['https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js','https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js'];
+  const one=u=>new Promise((ok,ko)=>{const s=document.createElement('script');s.src=u;s.onload=()=>window.html2pdf?ok(window.html2pdf):ko();s.onerror=()=>{s.remove();ko()};document.head.appendChild(s)});
+  H2P=one(src[0]).catch(()=>one(src[1])).catch(e=>{H2P=null;throw e});
+  return H2P;
+}
+function cPrintFallback(mode){
+  let box=document.getElementById('cprint'); if(!box){ box=document.createElement('div'); box.id='cprint'; box.className='r-doc'; document.body.appendChild(box) }
+  box.innerHTML=(mode==='conseils'?cClientSheet():cReport(mode==='blank')); const old=document.title; document.title=cPdfName(mode).replace(/\.pdf$/,'');
   document.body.classList.add('cprint');
   const done=()=>{document.body.classList.remove('cprint');document.title=old;window.removeEventListener('afterprint',done)};
-  window.addEventListener('afterprint',done);
-  setTimeout(()=>window.print(),60);
+  window.addEventListener('afterprint',done); setTimeout(()=>window.print(),60);
+}
+async function cPrint(mode){
+  const btns=[...document.querySelectorAll(`[data-cprint="${mode}"]`)]; const lab=btns.map(b=>b.textContent);
+  btns.forEach(b=>{b.disabled=true;b.textContent='Création du PDF…'});
+  const restore=()=>btns.forEach((b,i)=>{b.disabled=false;b.textContent=lab[i]});
+  let lib; try{ lib=await cLoadH2P() }catch(e){ restore(); toast("Téléchargement direct indisponible : choisis « Enregistrer au format PDF » dans la fenêtre qui s'ouvre"); cPrintFallback(mode); return }
+  const wrap=document.createElement('div'); wrap.style.cssText='position:absolute;left:-10000px;top:0;width:700px';
+  const el=document.createElement('div'); el.className='r-doc'; el.innerHTML=(mode==='conseils'?cClientSheet():cReport(mode==='blank')); wrap.appendChild(el); document.body.appendChild(wrap);
+  const h=el.scrollHeight; const scale=Math.max(1,Math.min(2,Math.sqrt(15e6/(700*Math.max(h,1)))));
+  try{
+    await lib().set({margin:[12,12,14,12],filename:cPdfName(mode),image:{type:'jpeg',quality:0.95},
+      html2canvas:{scale,backgroundColor:'#ffffff',logging:false},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
+      pagebreak:{mode:['css','legacy'],avoid:['tr','h2','h3','.r-head','.r-mut','li','.r-foot']}}).from(el).save();
+    toast('PDF enregistré dans tes téléchargements');
+  }catch(e){ toast("Le PDF n'a pas pu être créé : ouverture de la fenêtre d'impression"); cPrintFallback(mode) }
+  finally{ wrap.remove(); restore() }
 }
 function cSet(k,val){ if(val===''||val==null||(Array.isArray(val)&&!val.length)) delete CONS.v[k]; else CONS.v[k]=val }
 function cRefreshNav(){ const nv=document.querySelector('.c-nav'); if(!nv) return; for(const b of nv.querySelectorAll('[data-cstep]')){ const s=CONSULT.steps.find(x=>x.id===b.dataset.cstep); const [n]=cFilled(s); let i=b.querySelector('i'); if(n){ if(!i){i=document.createElement('i');b.appendChild(i)} i.textContent=s.target?'✓':n } else if(i) i.remove() } }
@@ -1155,11 +1236,155 @@ document.addEventListener('click',ev=>{
   if(d.cprint){ cPrint(d.cprint); return }
   if('cclear' in d){ CONS.clr=true; render(); return }
   if('cclearNo' in d){ CONS.clr=false; render(); return }
-  if('cclearOk' in d){ CONS.v={}; CONS.tgt=[]; CONS.patho=[]; CONS.clr=false; CONS.step='accueil'; cInit(); render(); window.scrollTo({top:0}); toast('Consultation effacée'); return }
+  if('cclearOk' in d){ CONS.v={}; CONS.tgt=[]; CONS.patho=[]; CONS.sel.clear(); CONS.hide.clear(); CONS.extra=[]; CONS.open.clear(); CONS.nfree=0; CONS.clr=false; CONS.step='accueil'; cInit(); render(); window.scrollTo({top:0}); toast('Consultation effacée'); return }
 });
 document.addEventListener('keydown',ev=>{ if(ev.key==='Enter'&&ev.target.id==='cpIn'){ ev.preventDefault(); const b=document.querySelector('[data-cpadd]'); if(b) b.click() } });
 window.addEventListener('beforeunload',ev=>{ if(CONSULT&&cHas()){ ev.preventDefault(); ev.returnValue='' } });
 function cInit(){ const d=new Date(); CONS.v.date_rdv=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0') }
+
+/* ---------- Conseils détectés pendant la consultation (rien n'est stocké) ---------- */
+CONS.sel=new Map(); CONS.hide=new Set(); CONS.extra=[]; CONS.open=new Set(); CONS.drawer=false; CONS.nfree=0;
+const cKey=(st,l)=>{ for(const x of CONSULT.steps) if(x.id===st) for(const sc of x.secs) for(const f of sc.f) if(f.l&&f.l.startsWith(l)) return f.k; return '' };
+const cN=s=>' '+String(s||'').toLowerCase().replace(/œ/g,'oe').replace(/æ/g,'ae').replace(/’/g,"'").normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,' ').trim()+' ';
+const CCATS=['Dans mon assiette : à privilégier','Dans mon assiette : à limiter','Cures et rythme des repas','Bouger','Stress, sommeil et récupération',"Techniques d'hygiène vitale à faire chez soi",'Mon environnement au quotidien','Plantes, compléments et fleurs','Autres techniques','Conseils','Professionnels à consulter','Précautions'];
+function cCat(t,kind,grp){
+  if(/^Alimentation à privilégier|^Sources|^Nutriments/.test(t)) return CCATS[0];
+  if(/^Alimentation à limiter/.test(t)) return CCATS[1];
+  if(/^Cures|jeûne/i.test(t)) return CCATS[2];
+  if(/déconseill|^Interactions|^Précautions/.test(t)||kind==='warn') return CCATS[11];
+  if(/^Activité physique/.test(t)) return CCATS[3];
+  if(/^Stress/.test(t)) return CCATS[4];
+  if(/^Hydrologie/.test(t)) return CCATS[5];
+  if(/^Environnement/.test(t)) return CCATS[6];
+  if(/^Phytologie|^Aromatologie|^Gemmothérapie|^Compléments|^Fleurs de Bach|^En pratique/.test(t)) return CCATS[7];
+  if(/^Autres techniques/.test(t)) return CCATS[8];
+  if(/^Vers qui orienter/.test(t)) return CCATS[10];
+  if(/Sommeil|stress/i.test(grp||'')) return CCATS[4];
+  return CCATS[9];
+}
+const SUBJ={};
+function cSubj(id){
+  if(SUBJ[id]) return SUBJ[id];
+  const e=BYID.get(id); if(!e) return null;
+  const bl=e.blocks||[]; const g=[]; const alert=[];
+  const start=bl.findIndex(b=>b[0]==='h'&&/^Boîte à outils/.test(b[1]));
+  for(let i=0;i<bl.length;i++){ const b=bl[i]; if(b[0]!=='sec') continue;
+    if(/^Surveillance et signes d'alerte/.test(b[1])){ alert.push(...b[3]); continue }
+    if(start>=0){ if(i<start) continue; if(/^Points à réévaluer|^Origine émotionnelle/.test(b[1])) continue }
+    else { if(b[2]==='med'||b[2]==='emo'||/^(Rôle|Ce que c'est|Définition|Causes|Histoire|Mécanisme)/.test(b[1])) continue }
+    g.push({t:b[1],kind:b[2],cat:cCat(b[1],b[2],e.grp),items:b[3]});
+  }
+  return SUBJ[id]={id,t:e.t,grp:e.grp,g,alert};
+}
+function cFieldList(){ const D=CONSULT.detect, out=[];
+  for(const st of CONSULT.steps){ if(D.noscan_steps.includes(st.id)) continue;
+    for(const sc of st.secs) for(const f of sc.f){ if(f.t==='info'||!f.k||D.noscan.includes(f.k)) continue; out.push({f,st}) } }
+  return out }
+let CFL=null;
+function cDetect(){
+  const D=CONSULT.detect, R=new Map();
+  const hit=(id,step,what)=>{ if(CONS.hide.has(id)||!BYID.get(id)) return; let r=R.get(id); if(!r){r={id,src:[]};R.set(id,r)} if(r.src.length<4&&!r.src.some(s=>s.what===what)) r.src.push({step,what}) };
+  const terms=Object.keys(D.terms);
+  const scan=(txt,step)=>{ const W=String(txt||'').split(/[^A-Za-zÀ-ÖØ-öø-ÿŒœÆæ0-9]+/).filter(Boolean); const n=' '+W.map(w=>cN(w).trim()).join(' ')+' '; if(n.length<4) return; const m=[];
+    for(const t of terms){ let p=n.indexOf(' '+t); while(p>=0){ const e=p+1+t.length; const c=n.slice(e,e+2); if((c[0]===' '||((c[0]==='s'||c[0]==='x')&&c[1]===' '))&&!/ (pas d[e']?|pas d|sans|aucune?|jamais de|ni|non|zero|absence de) *$/.test(n.slice(Math.max(0,p-16),p+1))) m.push([p,e,t]); p=n.indexOf(' '+t,p+1) } }
+    m.sort((a,b)=>(b[1]-b[0])-(a[1]-a[0])); const used=[];
+    for(const [a,b,t] of m){ if(used.some(([x,y])=>a<y&&b>x)) continue; used.push([a,b]); const wi=(n.slice(0,a+1).match(/ /g)||[]).length-1; const disp=W.slice(wi,wi+t.split(' ').length).join(' ')||t; for(const id of D.terms[t]) hit(id,step,disp.toLowerCase()) } };
+  CFL=CFL||cFieldList();
+  for(const {f,st} of CFL){ const v=CONS.v[f.k]; if(v==null||v==='') continue;
+    if(f.t==='s'){ for(const s of D.st) if(s.k===f.k&&((s.max!=null&&+v<=s.max)||(s.min!=null&&+v>=s.min))) for(const id of s.ids) hit(id,st.t,f.l+' : '+v+'/10'); continue }
+    const vals=[].concat(v);
+    const vt=D.vt[f.k]; if(vt) for(const x of vals) for(const id of (vt[x]||[])) hit(id,st.t,f.l+' : '+cLab(x));
+    scan(vals.map(cLab).join(' · '),st.t);
+  }
+  CONS.tgt.forEach(i=>scan(CONS.v['tgt_'+i],'Questions ciblées'));
+  for(const id of CONS.patho){ hit(id,'Questions ciblées','ajoutée'); scan(CONS.v['pat_'+id],'Questions ciblées') }
+  scan(CONS.v[cKey('synthese','Causes profondes')],'Synthèse');
+  for(const id of CONS.extra) hit(id,'Ajout manuel','ajoutée');
+  for(const k of CONS.sel.keys()){ const id=k.split('§')[0]; if(id!=='free'&&!R.has(id)&&!CONS.hide.has(id)) hit(id,'Conseils retenus','conseil retenu') }
+  return [...R.values()];
+}
+function cSelCount(id){ let n=0; for(const k of CONS.sel.keys()) if(k.startsWith(id+'§')) n++; return n }
+function cItemBtn(id,si,ii,txt,warn){ const k=`${id}§${si}§${ii}`, on=CONS.sel.has(k);
+  return `<li class="${warn?'w':''}"><button type="button" data-cadd="${esc(k)}" aria-pressed="${on}" title="${on?'Retirer de la liste':'Ajouter à la liste de conseils'}"><span class="ck">${on?'✓':'+'}</span><span>${esc(txt)}</span></button></li>` }
+function cSubjCard(r){
+  const s=cSubj(r.id); if(!s) return ''; const open=CONS.open.has(r.id); const n=cSelCount(r.id);
+  const src=r.src.map(x=>`${esc(x.step)} · « ${esc(x.what)} »`).join(' ; ');
+  const body=open?`<div class="ca-acts"><button type="button" class="btn sm" data-open="${esc(r.id)}">Ouvrir la fiche</button><button type="button" class="btn sm" data-chide="${esc(r.id)}">Ne pas retenir</button></div>
+    ${s.g.length?s.g.map((g,si)=>`<div class="ca-g ${g.cat===CCATS[11]?'warn':''}"><div class="ca-gh"><h4>${esc(g.t)}</h4><button type="button" class="ca-all" data-call="${esc(r.id)}§${si}">Tout ajouter</button></div><ul>${g.items.map((t,ii)=>cItemBtn(r.id,si,ii,t,g.cat===CCATS[11])).join('')}</ul></div>`).join(''):'<p class="c-muted">Pas de conseils structurés sur cette fiche : ouvre-la pour la lire.</p>'}
+    ${s.alert.length?`<div class="c-info alert"><b>Signes d'alerte</b><ul>${s.alert.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}`:'';
+  return `<section class="ca-card${open?' open':''}"><button type="button" class="ca-h" data-ctog="${esc(r.id)}" aria-expanded="${open}"><span class="ca-t">${esc(s.t)}</span>${n?`<i>${n}</i>`:''}<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button><div class="ca-src">${src}</div>${body}</section>`;
+}
+let CASIG='';
+function cAsideHtml(){
+  const L=cDetect(); CASIG=L.map(r=>r.id+':'+r.src.length).join(',');
+  const opts=ALL.filter(e=>e.cat==='pathologie'||e.cat==='population'||['Micronutrition','Sommeil','Gestion du stress'].includes(e.grp)).filter(e=>!e.top).map(e=>e.t).sort((a,b)=>a.localeCompare(b,'fr'));
+  const w=[]; if(CONS.v.ttt) w.push("Traitement en cours renseigné : vérifie la rubrique « Interactions et contre-indications » de chaque fiche et la fiche de chaque plante avant de la proposer.");
+  if(/enceinte|grossesse en cours|allait/.test(cN(Object.values(CONS.v).join(' ')))) w.push("Grossesse ou allaitement mentionné : la plupart des huiles essentielles, de nombreuses plantes et le jeûne sont exclus.");
+  return `<div class="ca-head"><div><h3>Conseils du référentiel</h3><p>Fiches repérées dans tes notes, par mots-clés : vérifie leur pertinence avant de retenir un conseil.</p></div>
+   <button type="button" class="btn primary sm" data-cstep="conseils">Ma liste · ${CONS.sel.size}</button><button type="button" class="ca-x" data-cfab aria-label="Fermer">✕</button></div>
+   ${w.map(x=>`<div class="c-info warn">${esc(x)}</div>`).join('')}
+   <div class="c-add"><input id="caIn" list="caList" placeholder="Ajouter une fiche (pathologie, carence…)" autocomplete="off"><datalist id="caList">${opts.map(t=>`<option value="${esc(t)}">`).join('')}</datalist><button type="button" class="btn sm" data-cxadd>Ajouter</button></div>
+   ${L.length?L.map(cSubjCard).join(''):`<div class="ca-empty">Au fil de la consultation, les pathologies, symptômes et carences que tu notes (par exemple « endométriose », « baisse de moral », « carence en fer ») font apparaître ici les conseils du référentiel.</div>`}
+   ${CONS.hide.size?`<button type="button" class="ca-all" data-cunhide>Réafficher les ${CONS.hide.size} fiche${CONS.hide.size>1?'s':''} écartée${CONS.hide.size>1?'s':''}</button>`:''}`;
+}
+function cAsideRefresh(force){
+  const a=document.getElementById('cAside'); if(!a) return;
+  const sig=cDetect().map(r=>r.id+':'+r.src.length).join(',');
+  if(force||sig!==CASIG){ const st=a.scrollTop; a.innerHTML=cAsideHtml(); a.scrollTop=st }
+  cFabRefresh();
+}
+function cFabRefresh(){ const b=document.querySelector('.c-fab'); if(!b) return; const n=cDetect().length; b.innerHTML=`Conseils · ${n} fiche${n>1?'s':''}${CONS.sel.size?` · ${CONS.sel.size} retenu${CONS.sel.size>1?'s':''}`:''}`; b.hidden=false }
+let CAT=null; const cAsideSoon=()=>{ clearTimeout(CAT); CAT=setTimeout(()=>cAsideRefresh(false),350) };
+/* étape « Conseils retenus » */
+function cGrouped(){ const G={}; for(const [k,o] of CONS.sel) (G[o.cat]=G[o.cat]||[]).push([k,o]); return CCATS.filter(c=>G[c]).map(c=>[c,G[c]]) }
+function cAdviceStep(){
+  const G=cGrouped();
+  return `<section class="c-sec"><p class="c-muted">Les conseils que tu as ajoutés depuis le panneau « Conseils du référentiel » sont rangés ici par thème. Tu peux reformuler chaque conseil pour la personne, en retirer ou en ajouter. La fiche conseils PDF reprend cette liste, les priorités de la synthèse et les signes d'alerte des fiches concernées.</p>
+   <div class="c-acts"><button type="button" class="btn primary" data-cprint="conseils">Télécharger la fiche conseils (PDF)</button><button type="button" class="btn" data-cfab>Voir les conseils du référentiel</button></div></section>
+   ${G.length?G.map(([c,L])=>`<section class="c-sec"><h3>${esc(c)}</h3>${L.map(([k,o])=>`<div class="cr-it"><textarea data-cedit="${esc(k)}" rows="2">${esc(o.txt)}</textarea><div class="cr-m"><span>${o.id==='free'?'Ajout libre':esc((BYID.get(o.id)||{}).t||'')}</span><button type="button" class="btn sm" data-cdel="${esc(k)}">Retirer</button></div></div>`).join('')}</section>`).join(''):'<div class="ca-empty">Aucun conseil retenu pour l\'instant. Ouvre une fiche dans le panneau « Conseils du référentiel » et touche le « + » devant un conseil pour l\'ajouter.</div>'}
+   <section class="c-sec"><h3>Ajouter un conseil libre</h3><div class="c-grid"><div class="c-f"><span class="c-l">Thème</span><select id="cfCat">${CCATS.map(c=>`<option>${esc(c)}</option>`).join('')}</select></div><div class="c-f full"><label class="c-l" for="cfTxt">Conseil</label><textarea id="cfTxt" rows="2"></textarea></div></div><div><button type="button" class="btn" data-cfree>Ajouter à la liste</button></div></section>`;
+}
+function cAlertsSel(){ const ids=[...new Set([...CONS.sel.values()].map(o=>o.id).filter(i=>i!=='free'))]; const A=[]; for(const id of ids){ const s=cSubj(id); if(s) for(const a of s.alert) if(!A.includes(a)) A.push(a) } return [ids,A] }
+function cClientSheet(){
+  const v=CONS.v, who=[v.prenom,v.nom].filter(Boolean).join(' '); const [ids,A]=cAlertsSel();
+  const prio=v.prio||''; const rdv=v[cKey('synthese','Prochain rendez-vous')]||'';
+  const G=cGrouped();
+  return `<header class="r-head"><div class="r-k">Fiche conseils naturopathiques</div><h1>${esc(who||'Mes conseils')}</h1><div class="r-meta">${v.date_rdv?`<span>Consultation du ${esc(cVal({k:'date_rdv',t:'d'}))}</span>`:''}${ids.length?`<span>${ids.map(i=>esc((BYID.get(i)||{}).t||'')).join(' · ')}</span>`:''}</div></header>
+   ${prio?`<section class="r-step"><h2>Mes priorités pour les prochaines semaines</h2><p>${esc(prio)}</p></section>`:''}
+   ${G.map(([c,L])=>`<section class="r-step"><h2>${esc(c==='Précautions'?'Précautions à respecter':c)}</h2><ul>${L.map(([k,o])=>`<li>${esc(o.txt)}</li>`).join('')}</ul></section>`).join('')}
+   ${A.length?`<section class="r-step r-al"><h2>Consulter sans attendre si</h2><ul>${A.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></section>`:''}
+   ${rdv?`<section class="r-step"><h2>Prochain rendez-vous</h2><p>${esc(rdv)}</p></section>`:''}
+   <p class="r-foot">Ces conseils d'hygiène de vie accompagnent le suivi médical et ne le remplacent pas. Ne jamais arrêter ni modifier un traitement sans l'avis du médecin. Avant de prendre une plante, une huile essentielle ou un complément, signaler tout traitement en cours, une grossesse ou un allaitement.</p>`;
+}
+function cAdviceReport(){ const G=cGrouped(); if(!G.length) return ''; return G.map(([c,L])=>`<div class="r-sec"><h3>${esc(c)}</h3><ul>${L.map(([k,o])=>`<li>${esc(o.txt)}</li>`).join('')}</ul></div>`).join('') }
+function vConsult(){
+  setTimeout(cFabRefresh,0);
+  return `<div class="c-layout${CONS.drawer?' drawer':''}"><div class="c-main">${vConsultMain()}</div><aside id="cAside" class="c-aside" aria-label="Conseils du référentiel">${cAsideHtml()}</aside></div><button type="button" class="c-fab" data-cfab hidden></button>`;
+}
+document.addEventListener('input',ev=>{ if(view.name!=='consult') return; const t=ev.target;
+  if(t.dataset&&t.dataset.cedit){ const o=CONS.sel.get(t.dataset.cedit); if(o) o.txt=t.value; return }
+  if(t.closest&&t.closest('.c-main')) cAsideSoon() });
+document.addEventListener('click',ev=>{
+  if(view.name!=='consult') return; const t=ev.target.closest('button'); if(!t) return; const d=t.dataset;
+  if(t.closest('.c-main')&&(d.cc||d.cs||d.ctg!==undefined||'cpadd' in d||d.cprm)) { cAsideSoon(); return }
+  if(d.ctog){ const id=d.ctog; CONS.open.has(id)?CONS.open.delete(id):CONS.open.add(id); cAsideRefresh(true); return }
+  if(d.cadd){ const [id,si,ii]=d.cadd.split('§'); const s=cSubj(id); if(!s) return; const g=s.g[+si];
+    if(CONS.sel.has(d.cadd)) CONS.sel.delete(d.cadd); else CONS.sel.set(d.cadd,{id,cat:g.cat,txt:g.items[+ii]});
+    const on=CONS.sel.has(d.cadd); t.setAttribute('aria-pressed',on); t.querySelector('.ck').textContent=on?'✓':'+'; cAsideHead(); cRefreshNav(); return }
+  if(d.call){ const [id,si]=d.call.split('§'); const s=cSubj(id), g=s&&s.g[+si]; if(!g) return; const all=g.items.every((x,ii)=>CONS.sel.has(`${id}§${si}§${ii}`));
+    g.items.forEach((x,ii)=>{const k=`${id}§${si}§${ii}`; if(all) CONS.sel.delete(k); else if(!CONS.sel.has(k)) CONS.sel.set(k,{id,cat:g.cat,txt:x})}); cAsideRefresh(true); cRefreshNav(); return }
+  if(d.chide){ CONS.hide.add(d.chide); CONS.extra=CONS.extra.filter(x=>x!==d.chide); cAsideRefresh(true); return }
+  if('cunhide' in d){ CONS.hide.clear(); cAsideRefresh(true); return }
+  if('cxadd' in d){ const q=cN($('#caIn').value); const e=ALL.find(x=>cN(x.t)===q)||(q.length>4&&ALL.find(x=>(x.cat==='pathologie'||x.grp==='Micronutrition')&&cN(x.t).includes(q)));
+    if(!e){ toast('Fiche introuvable : choisis-la dans la liste'); return } CONS.hide.delete(e.id); if(!CONS.extra.includes(e.id)) CONS.extra.push(e.id); CONS.open.add(e.id); cAsideRefresh(true); return }
+  if('cfab' in d){ CONS.drawer=!CONS.drawer; const l=document.querySelector('.c-layout'); if(l) l.classList.toggle('drawer',CONS.drawer); document.body.classList.toggle('cdrawer',CONS.drawer); return }
+  if(d.cdel){ CONS.sel.delete(d.cdel); render(); return }
+  if('cfree' in d){ const x=($('#cfTxt').value||'').trim(); if(!x){ toast('Écris le conseil à ajouter'); return } CONS.sel.set('free§'+(++CONS.nfree),{id:'free',cat:$('#cfCat').value,txt:x}); render(); return }
+});
+document.addEventListener('keydown',ev=>{ if(ev.key==='Enter'&&ev.target.id==='caIn'){ ev.preventDefault(); const b=document.querySelector('[data-cxadd]'); if(b) b.click() } });
+function cAsideHead(){ const b=document.querySelector('.ca-head [data-cstep="conseils"]'); if(b) b.textContent='Ma liste · '+CONS.sel.size;
+  document.querySelectorAll('.ca-card').forEach(c=>{const id=c.querySelector('[data-ctog]').dataset.ctog; const n=cSelCount(id); let i=c.querySelector('.ca-h i'); if(n){ if(!i){ i=document.createElement('i'); c.querySelector('.ca-t').after(i) } i.textContent=n } else if(i) i.remove()}); cFabRefresh() }
+document.addEventListener('click',ev=>{ if(CONS.drawer&&ev.target===document.body){ CONS.drawer=false; document.body.classList.remove('cdrawer'); const l=document.querySelector('.c-layout'); if(l) l.classList.remove('drawer') } });
 
 })();
 </script>
