@@ -1180,9 +1180,9 @@ let H2P=null;
 function cLoadH2P(){
   if(window.html2pdf) return Promise.resolve(window.html2pdf);
   if(H2P) return H2P;
-  const src=['https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js','https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js'];
+  const src=['html2pdf.bundle.min.js','https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js','https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js'];
   const one=u=>new Promise((ok,ko)=>{const s=document.createElement('script');s.src=u;s.onload=()=>window.html2pdf?ok(window.html2pdf):ko();s.onerror=()=>{s.remove();ko()};document.head.appendChild(s)});
-  H2P=one(src[0]).catch(()=>one(src[1])).catch(e=>{H2P=null;throw e});
+  H2P=one(src[0]).catch(()=>one(src[1])).catch(()=>one(src[2])).catch(e=>{H2P=null;throw e});
   return H2P;
 }
 function cPrintFallback(mode){
@@ -1192,20 +1192,33 @@ function cPrintFallback(mode){
   const done=()=>{document.body.classList.remove('cprint');document.title=old;window.removeEventListener('afterprint',done)};
   window.addEventListener('afterprint',done); setTimeout(()=>window.print(),60);
 }
+let CDL; function cDownloads(){ if(CDL!==undefined) return Promise.resolve(CDL); if(!(window.claude&&typeof window.claude.use==='function')) return Promise.resolve(CDL=null);
+  return Promise.race([window.claude.use('downloads'),new Promise(r=>setTimeout(()=>r(null),4000))]).then(d=>CDL=d||null,()=>CDL=null) }
+setTimeout(()=>{ try{ cDownloads() }catch(e){} },800);
+async function cSaveBlob(blob,name){
+  const dl=await cDownloads();
+  if(dl){ try{ await dl.save({filename:name,data:blob}); return 'ok' }catch(e){ if(e&&e.code==='declined') return 'declined'; if(e&&e.code==='rate_limited') return 'busy' } }
+  const ios=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  if(ios&&navigator.canShare){ try{ const f=new File([blob],name,{type:'application/pdf'}); if(navigator.canShare({files:[f]})){ await navigator.share({files:[f],title:name.replace(/\.pdf$/,'')}); return 'ok' } }catch(e){ if(e&&e.name==='AbortError') return 'declined' } }
+  const u=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=u; a.download=name; a.rel='noopener'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(u),60000); return 'ok';
+}
 async function cPrint(mode){
   const btns=[...document.querySelectorAll(`[data-cprint="${mode}"]`)]; const lab=btns.map(b=>b.textContent);
   btns.forEach(b=>{b.disabled=true;b.textContent='Création du PDF…'});
   const restore=()=>btns.forEach((b,i)=>{b.disabled=false;b.textContent=lab[i]});
-  let lib; try{ lib=await cLoadH2P() }catch(e){ restore(); toast("Téléchargement direct indisponible : choisis « Enregistrer au format PDF » dans la fenêtre qui s'ouvre"); cPrintFallback(mode); return }
+  let lib; try{ lib=await cLoadH2P() }catch(e){ restore(); toast("Le PDF n'a pas pu être préparé : vérifie la connexion internet puis réessaie"); return }
   const wrap=document.createElement('div'); wrap.style.cssText='position:absolute;left:-10000px;top:0;width:700px';
   const el=document.createElement('div'); el.className='r-doc'; el.innerHTML=(mode==='conseils'?cClientSheet():cReport(mode==='blank')); wrap.appendChild(el); document.body.appendChild(wrap);
   const h=el.scrollHeight; const scale=Math.max(1,Math.min(2,Math.sqrt(15e6/(700*Math.max(h,1)))));
+  const name=cPdfName(mode);
   try{
-    await lib().set({margin:[12,12,14,12],filename:cPdfName(mode),image:{type:'jpeg',quality:0.95},
+    const blob=await lib().set({margin:[12,12,14,12],filename:name,image:{type:'jpeg',quality:0.95},
       html2canvas:{scale,backgroundColor:'#ffffff',logging:false},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
-      pagebreak:{mode:['css','legacy'],avoid:['tr','h2','h3','.r-head','.r-mut','li','.r-foot']}}).from(el).save();
-    toast('PDF enregistré dans tes téléchargements');
-  }catch(e){ toast("Le PDF n'a pas pu être créé : ouverture de la fenêtre d'impression"); cPrintFallback(mode) }
+      pagebreak:{mode:['css','legacy'],avoid:['tr','h2','h3','.r-head','.r-mut','li','.r-foot']}}).from(el).outputPdf('blob');
+    wrap.remove();
+    const r=await cSaveBlob(blob,name);
+    if(r==='ok') toast('PDF prêt : « '+name+' »'); else if(r==='declined') toast('Enregistrement annulé'); else toast('Une fenêtre d\'enregistrement est déjà ouverte');
+  }catch(e){ toast("Le PDF n'a pas pu être créé, réessaie dans un instant") }
   finally{ wrap.remove(); restore() }
 }
 function cSet(k,val){ if(val===''||val==null||(Array.isArray(val)&&!val.length)) delete CONS.v[k]; else CONS.v[k]=val }
